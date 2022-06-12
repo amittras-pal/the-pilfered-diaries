@@ -2,6 +2,7 @@ import { User } from "firebase/auth";
 
 export type AuthContextProps = {
   currentUser: User | null;
+  isAdmin: boolean;
 };
 
 export type AuthContextProviderProps = {

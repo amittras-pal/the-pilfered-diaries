@@ -25,9 +25,9 @@ function StoriesList() {
         <div
           style={{
             width: "100%",
+            height: "100%",
             display: "flex",
             gap: "1rem",
-            height: "100%",
           }}>
           <Box
             component={Link}

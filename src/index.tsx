@@ -21,13 +21,13 @@ root.render(
           Button: { color: "orange" },
           Modal: {
             overlayBlur: 5,
-            overlayColor: "#ABABAB",
+            overlayColor: "#111",
             overlayOpacity: 0.5,
             overflow: "inside",
           },
           Drawer: {
             overlayBlur: 5,
-            overlayColor: "#ABABAB",
+            overlayColor: "#111",
             overlayOpacity: 0.5,
             overflow: "inside",
           },
