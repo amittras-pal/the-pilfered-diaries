@@ -86,14 +86,16 @@ function Login() {
   return (
     <>
       {!currentUser ? (
-        <Button
-          size="xs"
-          color="orange"
-          leftIcon={<BrandGoogle size={18} />}
-          loading={authenticating}
-          onClick={loginUser}>
-          {authenticating ? "Signing In" : "Sign In"}
-        </Button>
+        <Menu
+          control={
+            <Button size="xs" color="orange" loading={authenticating}>
+              {authenticating ? "Signing In" : "Sign In"}
+            </Button>
+          }>
+          <Menu.Item icon={<BrandGoogle size={18} />} onClick={loginUser}>
+            Sign In With Google
+          </Menu.Item>
+        </Menu>
       ) : (
         <Menu
           control={

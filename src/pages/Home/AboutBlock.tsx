@@ -9,7 +9,7 @@ const AboutBlock: React.FC = () => {
       <Box
         p={16}
         sx={(theme) => ({
-          backgroundColor: `${theme.colors.gray[0]}77`,
+          backgroundColor: `${theme.black}00088`,
           borderRadius: theme.radius.lg,
           height: "100%",
         })}>

@@ -10,7 +10,7 @@ const LatestStory: React.FC = () => {
       p={12}
       pt={6}
       sx={(theme) => ({
-        backgroundColor: theme.colors.gray[2],
+        backgroundColor: theme.colors.gray[9],
         borderRadius: theme.radius.lg,
       })}>
       <Text color="dimmed" weight="bold" size="xl" mb={8}>

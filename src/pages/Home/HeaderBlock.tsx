@@ -13,14 +13,14 @@ const HeaderBlock: React.FC = () => {
     <Box my={16}>
       <BackgroundImage
         src={headerImg}
+        p="xl"
         sx={(theme) => ({
-          height: "300px",
+          height: "50vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           borderRadius: theme.radius.lg,
-        })}
-        p="xl">
+        })}>
         <Text
           sx={(theme) => ({
             fontSize: "1.75rem",

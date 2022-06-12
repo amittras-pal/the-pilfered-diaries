@@ -16,6 +16,7 @@ root.render(
       <MantineProvider
         withNormalizeCSS
         withGlobalStyles
+        theme={{ colorScheme: "dark" }}
         defaultProps={{
           Button: { color: "orange" },
           Modal: {

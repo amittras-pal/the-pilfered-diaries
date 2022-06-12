@@ -1,6 +1,5 @@
 import { SimpleGrid } from "@mantine/core";
 import React from "react";
-import Footer from "../../components/Footer";
 import LatestStory from "../Stories/LatestStory";
 import StoriesList from "../Stories/StoriesList";
 import AboutBlock from "./AboutBlock";
@@ -19,7 +18,6 @@ const Home: React.FC = () => {
         <AboutBlock />
       </SimpleGrid>
       <StoriesList />
-      <Footer />
     </>
   );
 };

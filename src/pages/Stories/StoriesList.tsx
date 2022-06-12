@@ -54,7 +54,7 @@ function StoriesList() {
               mt={6}
               px={4}
               sx={(theme) => ({
-                color: theme.colors.gray[8],
+                color: theme.colors.gray[6],
               })}>
               A High School Crush (The Pilfered Diaries #1)
             </Text>
@@ -69,7 +69,7 @@ function StoriesList() {
               marginBottom: "87px",
               width: "220px",
               boxShadow: theme.shadows.md,
-              border: `1px solid ${theme.colors.gray[2]}`,
+              border: `1px solid ${theme.colors.gray[8]}`,
               borderRadius: theme.radius.lg,
             })}>
             <ThemeIcon size={100} color="gray" variant="light" radius="lg">

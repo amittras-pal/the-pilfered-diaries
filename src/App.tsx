@@ -1,6 +1,7 @@
 import { Box, Group, Navbar, ScrollArea, Text } from "@mantine/core";
 import { useWindowScroll } from "@mantine/hooks";
 import { Link } from "react-router-dom";
+import Footer from "./components/Footer";
 import Login from "./components/Login";
 import { APP_TITLE } from "./constants/appConstants";
 import AuthContextProvider from "./context/AuthContext";
@@ -31,6 +32,7 @@ function App() {
           <Box px={12}>
             <RouterOutlet />
           </Box>
+          <Footer />
         </ScrollArea>
       </Group>
     </AuthContextProvider>
