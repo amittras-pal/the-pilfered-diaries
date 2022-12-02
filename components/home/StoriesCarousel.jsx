@@ -119,13 +119,13 @@ export default function StoriesCarousel({ stories }) {
               </Link>
               <p className="text-light mb-2">{story.excerpt}</p>
               <TagsList tags={story.tags} showCount={4} />
-              {/* <p className="text-muted small mt-2">
+              <div className="text-muted small mt-2 d-flex">
                 <span>{dayjs(story.published).format(DATE_FORMATS.date)}</span>
                 <IconPoint size={8} style={{ margin: "0px 4px" }} />
                 <span>{story.author}</span>
                 <IconPoint size={8} style={{ margin: "0px 4px" }} />
                 <span>{story.chapterSlugs.length} Chapters</span>
-              </p> */}
+              </div>
             </div>
           ))}
         </div>
