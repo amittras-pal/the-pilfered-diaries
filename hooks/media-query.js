@@ -16,14 +16,14 @@ const breakpoints = {
 export const useMediaQuery = (size) => {
   const [matches, setMatches] = useState(false);
 
-  const listener = useCallback(({ matches }) => {
-    setMatches(matches);
+  const listener = useCallback((e) => {
+    setMatches(e?.matches ?? false);
   }, []);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const media = window.matchMedia(`(min-width: ${breakpoints[size]}px)`);
-      listener();
+      listener(media);
       media.addEventListener("change", listener);
       return () => {
         media.removeEventListener("change", listener);
