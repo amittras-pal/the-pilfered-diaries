@@ -15,7 +15,7 @@ import styles from "../../styles/modules/Home.module.scss";
 
 export default function StoriesCarousel({ stories }) {
   const coverCarouselRef = useRef();
-  // const contentCarouselRef = useRef();
+  const contentCarouselRef = useRef();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const toggleCarousel = (dir) => {
@@ -23,16 +23,18 @@ export default function StoriesCarousel({ stories }) {
     const coverCarousel = new Carousel(coverCarouselRef.current, {
       interval: false,
     });
-    // const contentCarousel = new Carousel(contentCarouselRef.current, {
-    //   interval: false,
-    // });
+    const contentCarousel = new Carousel(contentCarouselRef.current, {
+      interval: false,
+    });
     if (dir === "next") {
       setCurrentSlide((prev) => prev + 1);
       coverCarousel.next();
+      contentCarousel.next();
       // setTimeout(() => contentCarousel.next(), 150);
     } else {
       setCurrentSlide((prev) => prev - 1);
       coverCarousel.prev();
+      contentCarousel.prev();
       // setTimeout(() => contentCarousel.prev(), 150);
     }
   };
@@ -92,7 +94,7 @@ export default function StoriesCarousel({ stories }) {
           ))}
         </div>
       </div>
-      {/* <div
+      <div
         className={`carousel slide mt-3 ${styles.concarr}`}
         ref={contentCarouselRef}
         data-bs-touch="false"
@@ -129,7 +131,7 @@ export default function StoriesCarousel({ stories }) {
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
     </>
   );
 }
