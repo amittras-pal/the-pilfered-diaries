@@ -14,26 +14,26 @@ import React, { useRef, useState } from "react";
 import styles from "../../styles/modules/Home.module.scss";
 
 export default function StoriesCarousel({ stories }) {
-  // const coverCarouselRef = useRef();
-  const contentCarouselRef = useRef();
+  const coverCarouselRef = useRef();
+  // const contentCarouselRef = useRef();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const toggleCarousel = (dir) => {
     const { Carousel } = require("bootstrap");
-    // const coverCarousel = new Carousel(coverCarouselRef.current, {
-    //   interval: false,
-    // });
-    const contentCarousel = new Carousel(contentCarouselRef.current, {
+    const coverCarousel = new Carousel(coverCarouselRef.current, {
       interval: false,
     });
+    // const contentCarousel = new Carousel(contentCarouselRef.current, {
+    //   interval: false,
+    // });
     if (dir === "next") {
       setCurrentSlide((prev) => prev + 1);
-      // coverCarousel.next();
-      setTimeout(() => contentCarousel.next(), 150);
+      coverCarousel.next();
+      // setTimeout(() => contentCarousel.next(), 150);
     } else {
       setCurrentSlide((prev) => prev - 1);
-      // coverCarousel.prev();
-      setTimeout(() => contentCarousel.prev(), 150);
+      coverCarousel.prev();
+      // setTimeout(() => contentCarousel.prev(), 150);
     }
   };
   return (
@@ -66,7 +66,7 @@ export default function StoriesCarousel({ stories }) {
         </Link>
       </div>
 
-      {/* <div
+      <div
         ref={coverCarouselRef}
         className={`carousel slide ${styles.imgcarr}`}
         style={{ height: "270px" }}
@@ -91,8 +91,8 @@ export default function StoriesCarousel({ stories }) {
             </div>
           ))}
         </div>
-      </div> */}
-      <div
+      </div>
+      {/* <div
         className={`carousel slide mt-3 ${styles.concarr}`}
         ref={contentCarouselRef}
         data-bs-touch="false"
@@ -129,7 +129,7 @@ export default function StoriesCarousel({ stories }) {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
