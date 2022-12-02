@@ -1,8 +1,8 @@
-import About from "@components/home/About";
-import GuestPosts from "@components/home/GuestPosts";
+// import About from "@components/home/About";
+// import GuestPosts from "@components/home/GuestPosts";
 import Header from "@components/home/Header";
-import PostsList from "@components/home/PostsList";
-import StoriesCarousel from "@components/home/StoriesCarousel";
+// import PostsList from "@components/home/PostsList";
+// import StoriesCarousel from "@components/home/StoriesCarousel";
 import { APP_TITLE, ISR_INTERVAL, SITE_URL } from "@constants/app";
 import firestore from "@fb/server";
 import { postsList, storiesList } from "@services/server";
@@ -39,20 +39,20 @@ export default function Home({ stories, posts, guestPosts, siteCover }) {
       />
       <div className={styles.home}>
         <Header siteCover={siteCover} />
-        <About />
+        {/* <About /> */}
         <div className="container-fluid py-2">
           <div className="container px-0 mt-4">
             <div className="row">
               <div className="col-md-7 mb-3 mb-md-0">
-                <StoriesCarousel stories={stories} />
+                {/* <StoriesCarousel stories={stories} /> */}
               </div>
               <div className="col-md-5">
-                <PostsList posts={posts} />
+                {/* <PostsList posts={posts} /> */}
               </div>
             </div>
           </div>
         </div>
-        <GuestPosts posts={guestPosts} />
+        {/* <GuestPosts posts={guestPosts} /> */}
       </div>
     </>
   );
