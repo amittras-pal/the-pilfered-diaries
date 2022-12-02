@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const breakpoints = {
   xs: 575,
@@ -16,22 +16,20 @@ const breakpoints = {
 export const useMediaQuery = (size) => {
   const [matches, setMatches] = useState(false);
 
+  const listener = useCallback(({ matches }) => {
+    setMatches(matches);
+  }, []);
+
   useEffect(() => {
-    const media =
-      typeof window !== "undefined"
-        ? window.matchMedia(`(min-width: ${breakpoints[size]}px)`)
-        : { matches: false };
-    if (media.matches !== matches) {
-      setMatches(media.matches);
+    if (typeof window !== "undefined") {
+      const media = window.matchMedia(`(min-width: ${breakpoints[size]}px)`);
+      listener();
+      media.addEventListener("change", listener);
+      return () => {
+        media.removeEventListener("change", listener);
+      };
     }
-    const listener = () => setMatches(media.matches);
-    if (typeof window !== "undefined")
-      window.addEventListener("resize", listener);
-    return () => {
-      if (typeof window !== "undefined")
-        window.removeEventListener("resize", listener);
-    };
-  }, [matches, size]);
+  }, [listener, matches, size]);
 
   return matches;
 };
