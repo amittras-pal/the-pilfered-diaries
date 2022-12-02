@@ -1,4 +1,3 @@
-import { useMediaQuery } from "@hooks/media-query";
 import notFound from "@images/NotFound.svg";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,12 +5,11 @@ import React from "react";
 import styles from "../styles/modules/NotFound.module.scss";
 
 export default function NotFound() {
-  const isLargeScreen = useMediaQuery("md");
   return (
     <div className={styles.wrapper}>
       <Image
         src={notFound}
-        width={isLargeScreen ? 512 : 330}
+        width={330}
         blurDataURL={notFound.blurDataURL}
         alt="submit-work-artwork"
         className="mb-3"

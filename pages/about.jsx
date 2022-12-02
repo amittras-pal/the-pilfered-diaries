@@ -2,7 +2,6 @@ import Alert from "@components/Alert";
 import { APP_TITLE, SITE_URL } from "@constants/app";
 import { store } from "@fb/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMediaQuery } from "@hooks/media-query";
 import { useNotifications } from "@hooks/notifications";
 import profilePic from "@images/about-2.png";
 import { IconCheck, IconCircleCheck, IconSend, IconX } from "@tabler/icons";
@@ -16,7 +15,6 @@ import * as yup from "yup";
 import styles from "../styles/modules/About.module.scss";
 
 export default function About() {
-  const isLargeScreen = useMediaQuery("md");
   const { showNotification } = useNotifications();
 
   const [sending, setSending] = useState(false);
@@ -98,7 +96,7 @@ export default function About() {
             <div className="col-md-6 d-flex justify-content-center">
               <Image
                 src={profilePic}
-                width={isLargeScreen ? 512 : 330}
+                width={330}
                 blurDataURL={profilePic.blurDataURL}
                 alt="Amittras' Profile Image"
               />

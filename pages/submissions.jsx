@@ -1,7 +1,6 @@
 import { APP_TITLE } from "@constants/app";
 import { store } from "@fb/client";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useMediaQuery } from "@hooks/media-query";
 import { useNotifications } from "@hooks/notifications";
 import submitWork from "@images/submissions-artwork.svg";
 import {
@@ -21,7 +20,6 @@ import styles from "../styles/modules/Submissions.module.scss";
 
 export default function Submissions() {
   const { showNotification } = useNotifications();
-  const isLargeScreen = useMediaQuery("md");
   const modalRef = useRef();
   const [submitting, setSubmitting] = useState(false);
 
@@ -139,7 +137,7 @@ export default function Submissions() {
               <div className="col-md-6 d-flex flex-column align-items-center">
                 <Image
                   src={submitWork}
-                  width={isLargeScreen ? 512 : 330}
+                  width={330}
                   blurDataURL={submitWork.blurDataURL}
                   alt="submit-work-artwork"
                   className="mb-3"

@@ -1,6 +1,5 @@
 import PostSmall from "@components/PostSmall";
 import { APP_TITLE } from "@constants/app";
-import { useMediaQuery } from "@hooks/media-query";
 import noPostsArt from "@images/NoGuestPosts.svg";
 import submitWork from "@images/submissions-artwork.svg";
 import Image from "next/image";
@@ -8,7 +7,6 @@ import Link from "next/link";
 import React from "react";
 
 export default function GuestPosts({ posts }) {
-  const isLargeScreen = useMediaQuery("md");
   return (
     <div className="container-fluid pt-2 pb-4 bg-primary text-dark">
       <div className="container px-0">
@@ -29,7 +27,7 @@ export default function GuestPosts({ posts }) {
               <>
                 <Image
                   src={noPostsArt}
-                  width={isLargeScreen ? 512 : 330}
+                  width={330}
                   blurDataURL={noPostsArt.blurDataURL}
                   alt="no-guest-posts"
                   className="mb-3"

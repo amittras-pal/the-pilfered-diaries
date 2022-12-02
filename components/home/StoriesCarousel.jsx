@@ -1,7 +1,6 @@
 import Tag from "@components/Tag";
 import TagsList from "@components/TagsList";
 import { DATE_FORMATS } from "@constants/app";
-import { useMediaQuery } from "@hooks/media-query";
 import {
   IconChevronLeft,
   IconChevronRight,
@@ -17,7 +16,6 @@ import styles from "../../styles/modules/Home.module.scss";
 export default function StoriesCarousel({ stories }) {
   const coverCarouselRef = useRef();
   const contentCarouselRef = useRef();
-  const isDesktop = useMediaQuery("md");
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const toggleCarousel = (dir) => {
@@ -71,7 +69,7 @@ export default function StoriesCarousel({ stories }) {
       <div
         ref={coverCarouselRef}
         className={`carousel slide ${styles.imgcarr}`}
-        style={{ height: isDesktop ? "320px" : "240px" }}
+        style={{ height: "270px" }}
         data-bs-touch="false"
       >
         <div className={`carousel-inner ${styles.imgcarr__inner}`}>
