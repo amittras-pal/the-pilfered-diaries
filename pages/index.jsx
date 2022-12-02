@@ -1,4 +1,4 @@
-// import About from "@components/home/About";
+import About from "@components/home/About";
 // import GuestPosts from "@components/home/GuestPosts";
 import Header from "@components/home/Header";
 // import PostsList from "@components/home/PostsList";
@@ -39,7 +39,7 @@ export default function Home({ stories, posts, guestPosts, siteCover }) {
       />
       <div className={styles.home}>
         <Header siteCover={siteCover} />
-        {/* <About /> */}
+        <About />
         <div className="container-fluid py-2">
           <div className="container px-0 mt-4">
             <div className="row">
