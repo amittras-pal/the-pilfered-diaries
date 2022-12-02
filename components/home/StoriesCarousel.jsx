@@ -105,7 +105,7 @@ export default function StoriesCarousel({ stories }) {
                 styles.concarr__item
               }`}
             >
-              {/* <Link
+              <Link
                 href={`/stories/${story.slug}`}
                 className={`mb-1 ${styles.title}`}
               >
@@ -116,16 +116,16 @@ export default function StoriesCarousel({ stories }) {
                     <span className="ms-1">Ongoing</span>
                   </Tag>
                 )}
-              </Link> */}
-              {/* <p className="text-light mb-2">{story.excerpt}</p>
-              <TagsList tags={story.tags} showCount={4} /> */}
-              <p className="text-muted small mt-2">
+              </Link>
+              <p className="text-light mb-2">{story.excerpt}</p>
+              <TagsList tags={story.tags} showCount={4} />
+              {/* <p className="text-muted small mt-2">
                 <span>{dayjs(story.published).format(DATE_FORMATS.date)}</span>
                 <IconPoint size={8} style={{ margin: "0px 4px" }} />
                 <span>{story.author}</span>
                 <IconPoint size={8} style={{ margin: "0px 4px" }} />
                 <span>{story.chapterSlugs.length} Chapters</span>
-              </p>
+              </p> */}
             </div>
           ))}
         </div>
