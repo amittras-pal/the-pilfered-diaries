@@ -45,7 +45,7 @@ export default function GuestPosts({ posts }) {
           <div className="col-md-6 d-flex flex-column align-items-center">
             <Image
               src={submitWork}
-              width={isLargeScreen ? 512 : 330}
+              width={330}
               blurDataURL={submitWork.blurDataURL}
               alt="submit-work-artwork"
               className="mb-3"
