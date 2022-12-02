@@ -21,6 +21,7 @@ export default function StoriesCarousel({ stories }) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const toggleCarousel = (dir) => {
+    if (typeof window === "undefined") return;
     const { Carousel } = require("bootstrap");
     const coverCarousel = new Carousel(coverCarouselRef.current, {
       interval: false,
