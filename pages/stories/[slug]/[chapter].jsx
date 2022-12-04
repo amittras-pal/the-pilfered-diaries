@@ -1,4 +1,5 @@
 import Markdown from "@components/Markdown";
+import Share from "@components/Share";
 import { APP_TITLE, AVG_READING_SPEED } from "@constants/app";
 import firestore from "@fb/server";
 import { useIntersection } from "@hooks/intersection";
@@ -23,7 +24,7 @@ const TextControl = dynamic(() => import("../../../components/TextControl"));
 const CommentsList = dynamic(() => import("../../../components/CommentsList"));
 
 export default function SingleChapter({ metadata, content }) {
-  const { query } = useRouter();
+  const { query, asPath } = useRouter();
 
   const [fontSize, setFontSize] = useState(18);
   const ref = useRef();
@@ -88,6 +89,13 @@ export default function SingleChapter({ metadata, content }) {
               </Link>
             </div>
           </div>
+        </div>
+        <div className="my-3 container">
+          <Share
+            title={metadata.title}
+            url={asPath}
+            contentType="story-chapter"
+          />
         </div>
         {!metadata.nextChapter && (
           <>
