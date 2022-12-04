@@ -6,7 +6,7 @@ import { useIntersection } from "@hooks/intersection";
 import {
   IconArrowLeft,
   IconArrowRight,
-  IconHome,
+  IconChevronLeft,
   IconPoint,
 } from "@tabler/icons";
 import axios from "axios";
@@ -58,35 +58,41 @@ export default function SingleChapter({ metadata, content }) {
           </p>
         </div>
         <Markdown {...content} ref={ref} theme="dark" fontSize={fontSize} />
-        <div className="container px-1">
-          <div className="row mb-3">
-            <div className="col-6 px-0">
-              {metadata.previousChapter && (
+        <div className="container">
+          <div className="row mb-3 mx-0">
+            {metadata.previousChapter && (
+              <div className="col-6 ps-0 pe-1">
                 <Link
                   className={styles.navigation}
                   href={`/stories/${query.slug}/${metadata.previousChapter}`}
                 >
                   <IconArrowLeft size={24} />
-                  Previous Chapter
+                  Prev. Chapter
+                </Link>
+              </div>
+            )}
+            <div className="col-6 pe-0 ps-1">
+              {metadata.nextChapter ? (
+                <Link
+                  className={styles.navigation}
+                  href={`/stories/${query.slug}/${metadata.nextChapter}`}
+                >
+                  Next Chapter
+                  <span className="ms-1">
+                    <IconArrowRight size={24} />
+                  </span>
+                </Link>
+              ) : (
+                <Link
+                  className={styles.navigation}
+                  href={`/stories/${query.slug}`}
+                >
+                  <span className="me-1">
+                    <IconChevronLeft size={24} />
+                  </span>
+                  Story Home
                 </Link>
               )}
-            </div>
-            <div className="col-6 px-0">
-              <Link
-                className={styles.navigation}
-                href={
-                  metadata.nextChapter
-                    ? `/stories/${query.slug}/${metadata.nextChapter}`
-                    : `/stories/${query.slug}`
-                }
-              >
-                {metadata.nextChapter ? "Next Chapter" : "Story Home"}
-                {metadata.nextChapter ? (
-                  <IconArrowRight size={24} />
-                ) : (
-                  <IconHome size={20} />
-                )}
-              </Link>
             </div>
           </div>
         </div>
