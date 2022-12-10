@@ -225,7 +225,7 @@ export default function About({ image }) {
                         className={`form-control ${
                           errors.message ? "is-invalid" : ""
                         }`}
-                        {...register(".message")}
+                        {...register("message")}
                         placeholder="Your Message, Comment, Suggesstion (required)"
                         style={{ height: "100px" }}
                       ></textarea>

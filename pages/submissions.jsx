@@ -386,7 +386,7 @@ export default function Submissions() {
                   className={`form-control ${
                     errors.emailId ? "is-invalid" : ""
                   }`}
-                  {...register(".emailId")}
+                  {...register("emailId")}
                   placeholder="Email Address"
                 />
                 <label htmlFor="commentTitle">Email Address</label>
