@@ -1,5 +1,6 @@
 import { auth, store } from "@fb/client";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { loginFormValues, loginValidator } from "@lib/validators";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import {
   addDoc,
@@ -24,19 +25,8 @@ export default function Login() {
   } = useForm({
     mode: "onChange",
     shouldFocusError: true,
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-    resolver: yupResolver(
-      yup.object().shape({
-        email: yup
-          .string()
-          .email("Invalid Email.")
-          .required("Email is required."),
-        password: yup.string().required("Password is required."),
-      })
-    ),
+    defaultValues: loginFormValues,
+    resolver: yupResolver(loginValidator),
   });
 
   const [failedAttempts, setFailedAttempts] = useState(0);

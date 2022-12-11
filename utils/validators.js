@@ -44,6 +44,32 @@ export const postFormValues = {
   refreshPassword: "",
 };
 
+export const submissionFormValues = {
+  userName: "",
+  emailId: "",
+  ideaTitle: "",
+  ideaDescription: "",
+};
+
+export const subscriptionFormValues = {
+  email: "",
+};
+
+export const commentFormValues = {
+  userName: "",
+  email: "",
+  title: "",
+  body: "",
+};
+
+export const loginFormValues = { email: "", password: "" };
+
+export const messageFormValues = {
+  name: "",
+  email: "",
+  message: "",
+};
+
 export const storyValidator = yup.object().shape({
   excerpt: yup.string().required("Excerpt is required"),
   title: yup
@@ -192,4 +218,50 @@ export const postValidator = yup.object().shape({
         return true;
       },
     }),
+});
+
+export const submissionValidator = yup.object().shape({
+  userName: yup.string().required("Name is required."),
+  emailId: yup
+    .string()
+    .email("Invalid Email")
+    .required("Email Id is required."),
+  ideaTitle: yup
+    .string()
+    .required("Title is required")
+    .max(180, "Title should be 180 characters or less."),
+  ideaDescription: yup
+    .string()
+    .required("Brief description is required.")
+    .min(120, "Title should be between 120-1000 characters in length")
+    .max(1000, "Title should be between 120-1000 characters in length"),
+});
+
+export const subscriptionValidator = yup.object().shape({
+  email: yup
+    .string()
+    .email("Please enter a valid email ID.")
+    .required("Please enter an Email ID."),
+});
+
+export const commentValidator = yup.object().shape({
+  userName: yup.string().required("Name is required."),
+  email: yup.string().optional().email("Invalid Email"),
+  title: yup.string().required("Comment title is required"),
+  body: yup.string().optional(),
+});
+
+export const loginValidator = yup.object().shape({
+  email: yup.string().email("Invalid Email.").required("Email is required."),
+  password: yup.string().required("Password is required."),
+});
+
+export const messageValidator = yup.object().shape({
+  name: yup.string().required("Name is required."),
+  email: yup.string().email("Invalid Email").required("Email Id is required."),
+  message: yup
+    .string()
+    .required("Message is required")
+    .min(20, "Message should be between 20-1024 characters in length")
+    .max(1024, "Message should be between 20-1024 characters in length"),
 });

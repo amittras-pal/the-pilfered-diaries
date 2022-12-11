@@ -13,7 +13,7 @@ const FilePreview = lazy(() => import("../../components/admin/FilePreview"));
 const Submissions = lazy(() => import("../../components/admin/Submissions"));
 
 export default function Admin() {
-  const [active, setActive] = useState("add-post");
+  const [active, setActive] = useState("");
 
   const logout = async () => {
     await signOut(auth);
@@ -66,11 +66,29 @@ export default function Admin() {
           </button>
           <button
             className={`${styles.nav} ${
+              active === "messages" ? styles.nav__active : ""
+            }`}
+            onClick={() => setActive("messages")}
+            disabled
+          >
+            View Messages
+          </button>
+          <button
+            className={`${styles.nav} ${
               active === "preview" ? styles.nav__active : ""
             }`}
             onClick={() => setActive("preview")}
           >
             File Preview
+          </button>
+          <button
+            className={`${styles.nav} ${
+              active === "site-content" ? styles.nav__active : ""
+            }`}
+            onClick={() => setActive("site-content")}
+            disabled
+          >
+            Manage Site Content
           </button>
           <button
             className={`mt-auto ${styles.nav}  bg-danger`}
@@ -80,6 +98,13 @@ export default function Admin() {
           </button>
         </div>
         <div className={`w-75 ${styles.content}`} id="prContent">
+          {!active && (
+            <div className="d-flex w-100 h-100 justify-content-center align-items-center">
+              <h1 className="display-4 text-center">
+                Select a Task from the left to get started.
+              </h1>
+            </div>
+          )}
           <Suspense fallback="Loading Module">
             {active === "comments" && <Comments />}
             {active === "submissions" && <Submissions />}
