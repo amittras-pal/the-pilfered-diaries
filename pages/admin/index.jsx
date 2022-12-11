@@ -6,13 +6,14 @@ import AuthProvider from "../../context/Auth";
 import styles from "../../styles/modules/Admin.module.scss";
 
 const AddChapter = lazy(() => import("../../components/admin/AddChapter"));
+const AddPost = lazy(() => import("../../components/admin/AddPost"));
+const AddStory = lazy(() => import("../../components/admin/AddStory"));
 const Comments = lazy(() => import("../../components/admin/Comments"));
 const FilePreview = lazy(() => import("../../components/admin/FilePreview"));
 const Submissions = lazy(() => import("../../components/admin/Submissions"));
-const AddStory = lazy(() => import("../../components/admin/AddStory"));
 
 export default function Admin() {
-  const [active, setActive] = useState("add-story");
+  const [active, setActive] = useState("add-post");
 
   const logout = async () => {
     await signOut(auth);
@@ -22,6 +23,14 @@ export default function Admin() {
     <AuthProvider>
       <div className={styles.wrapper}>
         <div className={`w-25 ${styles.sidebar}`}>
+          <button
+            className={`${styles.nav} ${
+              active === "add-post" ? styles.nav__active : ""
+            }`}
+            onClick={() => setActive("add-post")}
+          >
+            Add New Post
+          </button>
           <button
             className={`${styles.nav} ${
               active === "add-story" ? styles.nav__active : ""
@@ -36,23 +45,13 @@ export default function Admin() {
             }`}
             onClick={() => setActive("add-chapter")}
           >
-            Add Chapter to WIP Story
-          </button>
-          <button
-            className={`${styles.nav} ${
-              active === "post" ? styles.nav__active : ""
-            }`}
-            onClick={() => setActive("post")}
-            disabled
-          >
-            Add New Post
+            Add Chapter to an Ongoing Story
           </button>
           <button
             className={`${styles.nav} ${
               active === "comments" ? styles.nav__active : ""
             }`}
             onClick={() => setActive("comments")}
-            disabled
           >
             Approve Comments
           </button>
@@ -90,6 +89,9 @@ export default function Admin() {
             )}
             {active === "add-story" && (
               <AddStory onCompleted={() => setActive("")} />
+            )}
+            {active === "add-post" && (
+              <AddPost onCompleted={() => setActive("")} />
             )}
           </Suspense>
         </div>

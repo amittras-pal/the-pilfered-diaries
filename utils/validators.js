@@ -29,6 +29,21 @@ export const chapterFormValues = {
   refreshPassword: "",
 };
 
+export const postFormValues = {
+  author: "Amittras",
+  byGuest: false,
+  content: null,
+  cover: null,
+  draft: false,
+  excerpt: "",
+  published: null,
+  tags: [],
+  thumbnail: null,
+  title: "",
+  postId: "",
+  refreshPassword: "",
+};
+
 export const storyValidator = yup.object().shape({
   excerpt: yup.string().required("Excerpt is required"),
   title: yup
@@ -102,6 +117,78 @@ export const chapterValidator = yup.object().shape({
       test: (value) => {
         if (!value) return false;
         if (!value.name?.endsWith(".mdx")) return false;
+        return true;
+      },
+    }),
+});
+
+export const postValidator = yup.object().shape({
+  excerpt: yup.string().required("Excerpt is required"),
+  title: yup
+    .string()
+    .required("Title is required")
+    .matches(
+      /^[A-Za-z0-9\s]*$/,
+      "Title must have only alphanumeric characters and spaces."
+    ),
+  author: yup
+    .string()
+    .required("Author Name is required")
+    .test({
+      name: "author",
+      message: "You can't be the author if marked as guest.",
+      test: (val, ctx) => {
+        if (ctx.parent.byGuest && val === "Amittras") return false;
+        else return true;
+      },
+    }),
+  tags: yup.array().min(1, "Tags are required").max(5, "Upto 5 tags allowed."),
+  refreshPassword: yup.string().when("draft", {
+    is: false,
+    then: (schema) => schema.required("Refresh Password is required."),
+    otherwise: (schema) => schema.optional(),
+  }),
+  content: yup
+    .mixed()
+    .required("Content file is required.")
+    .test({
+      name: "fileType",
+      message: "Invalid File Type",
+      test: (value) => {
+        if (!value) return false;
+        if (!value.name?.endsWith(".mdx")) return false;
+        return true;
+      },
+    }),
+  cover: yup
+    .mixed()
+    .required("Cover Image is required.")
+    .test({
+      name: "fileType",
+      message: "Invalid File Type",
+      test: (value) => {
+        if (!value) return false;
+        if (!value.name?.endsWith(".avif")) return false;
+        return true;
+      },
+    }),
+  thumbnail: yup
+    .mixed()
+    .required("Thumbnail is missing.")
+    .test({
+      name: "fileType",
+      message: "Invalid File Type",
+      test: (value) => {
+        if (!value) return false;
+        if (!value.name?.endsWith(".avif")) return false;
+        return true;
+      },
+    })
+    .test({
+      name: "sameFile",
+      message: "Thumbanail and Cover cannot be same",
+      test: (val, ctx) => {
+        if (val?.name === ctx.parent.cover?.name) return false;
         return true;
       },
     }),
