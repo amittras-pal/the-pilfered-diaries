@@ -1,6 +1,6 @@
-import { SITE_URL } from "@constants/app";
 import { storage, store } from "@fb/client";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { chapterFormValues, chapterValidator } from "@lib/validators";
 import axios from "axios";
 import {
   collection,
@@ -14,11 +14,15 @@ import {
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import styles from "../../styles/modules/Admin.module.scss";
 
 export default function AddChapter({ onCompleted }) {
   const fileInput = useRef();
+
+  const [processing, setProcessing] = useState("");
+  const [wipStories, setWipStories] = useState([]);
+  const [selectedStory, setSelectedStory] = useState(null);
+
   const {
     register,
     formState: { errors },
@@ -29,64 +33,10 @@ export default function AddChapter({ onCompleted }) {
   } = useForm({
     mode: "onBlur",
     shouldFocusError: true,
-    defaultValues: {
-      author: "Amittras",
-      excerpt: "",
-      chapterId: "",
-      order: 1,
-      previousChapter: "",
-      nextChapter: "",
-      title: "",
-      file: null,
-      markCompleted: false,
-      refreshPassword: "",
-    },
-    resolver: yupResolver(
-      yup.object().shape({
-        title: yup.string().required("Title is required"),
-        author: yup.string().required("Author is required"),
-        excerpt: yup.string().required("Excerpt is required"),
-        refreshPassword: yup.string().required("Refresh Password is required."),
-        chapterId: yup
-          .string()
-          .required("Chapter ID is required")
-          .matches(/^\S*$/, { message: "Chapter ID must not have spaces." }),
-        previousChapter: yup.string().test({
-          name: "previousChapter",
-          message:
-            "Previous Chapter is required when it's not the first chapter.",
-          test: (value, ctx) => {
-            if (ctx.parent.order > 1 && !value) return false;
-            return true;
-          },
-        }),
-        order: yup.number().test({
-          name: "orderCounter",
-          message: "Order must follow the sequence in the story.",
-          test: (value) => {
-            if (value !== selectedStory?.chapterSlugs?.length + 1) return false;
-            return true;
-          },
-        }),
-        file: yup
-          .mixed()
-          .required("Content file is required")
-          .test({
-            name: "fileType",
-            message: "Invalid File Type",
-            test: (value) => {
-              if (!value) return false;
-              if (!value.name?.endsWith(".mdx")) return false;
-              return true;
-            },
-          }),
-      })
-    ),
+    defaultValues: chapterFormValues,
+    resolver: yupResolver(chapterValidator),
   });
 
-  const [processing, setProcessing] = useState("");
-  const [wipStories, setWipStories] = useState([]);
-  const [selectedStory, setSelectedStory] = useState(null);
   useEffect(() => {
     (async () => {
       const q = query(collection(store, "stories"), where("wip", "==", true));
@@ -100,6 +50,7 @@ export default function AddChapter({ onCompleted }) {
   useEffect(() => {
     if (selectedStory) {
       setValue("order", selectedStory?.chapterSlugs.length + 1);
+      setValue("author", selectedStory.author);
       if (selectedStory?.chapterSlugs.length > 0)
         setValue("previousChapter", selectedStory?.chapterSlugs.at(-1));
     }
@@ -135,19 +86,28 @@ export default function AddChapter({ onCompleted }) {
         title: values.title,
         content: fileUrl,
       };
-      await setDoc(
-        doc(store, "stories", selectedStory.id, "chapters", values.chapterId),
-        chapter
+      const chapterRef = doc(
+        store,
+        "stories",
+        selectedStory.id,
+        "chapters",
+        values.chapterId
       );
+      await setDoc(chapterRef, chapter);
+
       setProcessing("Updating Story Info...");
       const storyUpdatePayload = {
         lastUpdated: Timestamp.fromDate(new Date()),
         chapterSlugs: [...selectedStory.chapterSlugs, values.chapterId],
         wip: !values.markCompleted,
+        draft: false,
       };
+      if (chapter.order === 1)
+        storyUpdatePayload.published = Timestamp.fromDate(new Date());
       const storyRef = doc(store, "stories", selectedStory.id);
       await setDoc(storyRef, storyUpdatePayload, { merge: true });
-      setProcessing("Story Updated");
+
+      setProcessing("Story Updated.");
       refreshPages(values);
     } catch (error) {
       console.error(error);
@@ -181,7 +141,7 @@ export default function AddChapter({ onCompleted }) {
   };
 
   return (
-    <div className={`${styles.chapter} p-3`}>
+    <div className="p-3">
       <div className="row mb-3">
         <div className="col-md-4">
           <select
@@ -248,7 +208,7 @@ export default function AddChapter({ onCompleted }) {
                   errors.author ? "is-invalid" : ""
                 }`}
                 placeholder="Author Name"
-                readOnly={processing}
+                readOnly
               />
               <label>Author Name</label>
               {errors.author && (
@@ -350,7 +310,7 @@ export default function AddChapter({ onCompleted }) {
                 className={`form-control ${errors.excerpt ? "is-invalid" : ""}`}
                 {...register("excerpt")}
                 placeholder="Chapter Excerpt"
-                style={{ height: "165px" }}
+                style={{ height: "165px", resize: "none" }}
                 readOnly={processing}
               ></textarea>
               <label>Chapter Excerpt</label>
@@ -361,14 +321,20 @@ export default function AddChapter({ onCompleted }) {
           </div>
           <div className="col-md-12 mb-3">
             <div
-              className={`${styles.chapter__file_input} ${
-                errors.file?.message ? styles.chapter__file_input_invalid : ""
+              className={`${styles.file} ${
+                errors.file?.message ? styles.file__invalid : ""
               }`}
               onClick={() => {
                 if (!processing) fileInput.current.click();
               }}
             >
-              <p className="mb-1">Add Content File</p>
+              <p className="mb-1">
+                {watch("file")?.name ? (
+                  <span className="text-success">{watch("file")?.name}</span>
+                ) : (
+                  "Add Content File"
+                )}
+              </p>
               <p className="small mb-0 text-muted">
                 Only .MDX files supported.
               </p>
@@ -384,12 +350,27 @@ export default function AddChapter({ onCompleted }) {
                 }}
                 ref={fileInput}
               />
+              {watch("file")?.name && (
+                <button
+                  className="btn btn-sm btn-outline-danger mt-2"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setValue("file", null, {
+                      shouldValidate: true,
+                      shouldTouch: true,
+                      shouldDirty: true,
+                    });
+                  }}
+                >
+                  Remove
+                </button>
+              )}
               {errors.file && (
                 <p className="small text-danger mb-0">{errors.file.message}</p>
               )}
             </div>
           </div>
-          <div className="col-md-4 offset-md-4 d-flex justify-content-center">
+          <div className="col-md-12 d-flex justify-content-end">
             <button
               type="submit"
               className="btn btn-sm btn-success"

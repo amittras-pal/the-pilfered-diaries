@@ -1,15 +1,18 @@
-import { signOut } from "firebase/auth";
-import React, { useState } from "react";
-import styles from "../../styles/modules/Admin.module.scss";
-import AuthProvider from "../../context/Auth";
 import { auth } from "@fb/client";
-import Comments from "@components/admin/Comments";
-import Submissions from "@components/admin/Submissions";
-import FilePreview from "@components/admin/FilePreview";
-import AddChapter from "@components/admin/AddChapter";
+import { signOut } from "firebase/auth";
+import React, { Suspense, useState } from "react";
+import { lazy } from "react";
+import AuthProvider from "../../context/Auth";
+import styles from "../../styles/modules/Admin.module.scss";
+
+const AddChapter = lazy(() => import("../../components/admin/AddChapter"));
+const Comments = lazy(() => import("../../components/admin/Comments"));
+const FilePreview = lazy(() => import("../../components/admin/FilePreview"));
+const Submissions = lazy(() => import("../../components/admin/Submissions"));
+const AddStory = lazy(() => import("../../components/admin/AddStory"));
 
 export default function Admin() {
-  const [active, setActive] = useState("");
+  const [active, setActive] = useState("add-story");
 
   const logout = async () => {
     await signOut(auth);
@@ -21,10 +24,9 @@ export default function Admin() {
         <div className={`w-25 ${styles.sidebar}`}>
           <button
             className={`${styles.nav} ${
-              active === "story" ? styles.nav__active : ""
+              active === "add-story" ? styles.nav__active : ""
             }`}
-            onClick={() => setActive("story")}
-            disabled
+            onClick={() => setActive("add-story")}
           >
             Add New Story
           </button>
@@ -79,12 +81,17 @@ export default function Admin() {
           </button>
         </div>
         <div className={`w-75 ${styles.content}`} id="prContent">
-          {active === "comments" && <Comments />}
-          {active === "submissions" && <Submissions />}
-          {active === "preview" && <FilePreview />}
-          {active === "add-chapter" && (
-            <AddChapter onCompleted={() => setActive("")} />
-          )}
+          <Suspense fallback="Loading Module">
+            {active === "comments" && <Comments />}
+            {active === "submissions" && <Submissions />}
+            {active === "preview" && <FilePreview />}
+            {active === "add-chapter" && (
+              <AddChapter onCompleted={() => setActive("")} />
+            )}
+            {active === "add-story" && (
+              <AddStory onCompleted={() => setActive("")} />
+            )}
+          </Suspense>
         </div>
       </div>
     </AuthProvider>

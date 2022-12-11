@@ -97,25 +97,56 @@
   }
 }
 
-.chapter {
-  &__file_input {
-    height: 140px;
+.file {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba($color: $light, $alpha: 0.1);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  &:hover {
+    border-color: rgba($color: $primary, $alpha: 0.3);
+  }
+  &__invalid {
+    border-color: $danger;
+  }
+  input {
+    display: none;
+  }
+}
+
+.tag {
+  height: 165px;
+  border-bottom: 1px solid darken($color: $light, $amount: 50);
+  transition: all 0.15s ease-in-out;
+  &__invalid {
+    border-bottom: 1px solid $danger !important;
+  }
+  &__value {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid rgba($color: $light, $alpha: 0.1);
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: all 0.15s ease-in-out;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  &__item {
+    border: 1px solid rgba($color: $light, $alpha: 0.2);
+    padding: 0rem 0rem 0rem 0.25rem;
+  }
+  &__remove {
+    border: none;
+    padding: 0.25rem;
+    background-color: transparent;
+    color: $light;
     &:hover {
-      border-color: rgba($color: $primary, $alpha: 0.3);
+      color: $danger;
     }
-    &_invalid {
-      border-color: rgba($color: $danger, $alpha: 0.6);
-    }
-    input {
-      display: none;
-    }
+  }
+  &:focus-within {
+    border-bottom-color: $primary;
+  }
+  input {
+    border: none;
   }
 }
