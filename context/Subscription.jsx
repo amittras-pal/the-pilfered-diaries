@@ -1,7 +1,8 @@
-import { APP_TITLE } from "@constants/app";
+import { APP_TITLE, SUB_POPUP_DELAY } from "@constants/app";
 import { firebaseApp, store } from "@fb/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNotifications } from "@hooks/notifications";
+import { getMailCookie, setMailCookie } from "@lib/utils";
 import { subscriptionFormValues, subscriptionValidator } from "@lib/validators";
 import { IconCheck, IconInfoCircle, IconSend, IconX } from "@tabler/icons";
 import { getAnalytics, logEvent } from "firebase/analytics";
@@ -31,18 +32,9 @@ export function useSubscription() {
 export function SubscriptionProvider({ children }) {
   const modRef = useRef();
   const { showNotification } = useNotifications();
+  const [cancelAutoPopup, setCancelAutoPopup] = useState(false);
   const [subscribing, setSubscribing] = useState(false);
   const [subscribed, setSubscribed] = useState(null);
-
-  useEffect(() => {
-    const focusFirstInput = (e) => {
-      e.target.querySelector(".form-control").focus();
-    };
-    if (modRef.current) {
-      console.log(document.cookie);
-      modRef.current.addEventListener("shown.bs.modal", focusFirstInput);
-    }
-  }, []);
 
   const {
     handleSubmit,
@@ -56,10 +48,50 @@ export function SubscriptionProvider({ children }) {
     resolver: yupResolver(subscriptionValidator),
   });
 
+  useEffect(() => {
+    const focusFirstInput = (e) => {
+      e.target.querySelector(".form-control").focus();
+    };
+    if (modRef.current) {
+      modRef.current.addEventListener("shown.bs.modal", focusFirstInput);
+    }
+  }, []);
+
+  useEffect(() => {
+    let timeout = null;
+    const subscribedUser = getMailCookie();
+    if (subscribedUser) setSubscribed(subscribedUser);
+    else if (!cancelAutoPopup) {
+      timeout = setTimeout(() => {
+        const { Modal } = require("bootstrap");
+        const formModal = new Modal(modRef.current);
+        reset();
+        if (formModal) formModal.show();
+        else {
+          const instance = new Modal(modRef.current);
+          instance.show();
+        }
+      }, SUB_POPUP_DELAY);
+    } else {
+      clearTimeout(timeout);
+    }
+
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [cancelAutoPopup, reset]);
+
   const showForm = () => {
+    reset();
+    setCancelAutoPopup(true);
     const { Modal } = require("bootstrap");
     const formModal = Modal.getInstance(modRef.current);
-    formModal.show();
+    if (formModal) formModal.show();
+    else {
+      const { Modal } = require("bootstrap");
+      const instance = new Modal(modRef.current);
+      instance.show();
+    }
   };
 
   const closeForm = () => {
@@ -69,25 +101,7 @@ export function SubscriptionProvider({ children }) {
     reset();
   };
 
-  useEffect(() => {
-    let timeout = null;
-    if (sessionStorage.getItem("subscribed"))
-      setSubscribed(sessionStorage.getItem("subscribed"));
-    else
-      timeout = setTimeout(() => {
-        const { Modal } = require("bootstrap");
-        const formModal = new Modal(modRef.current);
-        formModal.show();
-      }, 2500);
-
-    return () => {
-      console.log(timeout);
-      if (timeout) clearTimeout(timeout);
-    };
-  }, []);
-
   const subscribe = async (values) => {
-    console.log(values);
     setSubscribing(true);
     try {
       const subscriptions = collection(store, "subscriptions");
@@ -103,18 +117,7 @@ export function SubscriptionProvider({ children }) {
           classNames: "bg-info text-dark",
           icon: <IconInfoCircle size={18} />,
         });
-        sessionStorage.setItem("subscribed", values.email);
-
-        const date = new Date();
-        date.setTime(date.getTime() + 7 * 24 * 60 * 60 * 1000);
-        const cookieString =
-          "_sub=" +
-          values.email +
-          "; Expires=" +
-          date.toUTCString() +
-          "; Path=/;";
-        document.cookie = cookieString;
-
+        setMailCookie(values.email);
         setSubscribed(values.email);
       } else {
         await addDoc(subscriptions, {
@@ -128,12 +131,11 @@ export function SubscriptionProvider({ children }) {
           icon: <IconCheck size={18} />,
         });
         setSubscribed(values.email);
-        sessionStorage.setItem("subscribed", values.email);
+        setMailCookie(values.email);
         const analytics = getAnalytics(firebaseApp);
         logEvent(analytics, "sign_up");
       }
     } catch (error) {
-      console.log(error);
       showNotification({
         title: "Failed to subscribe",
         body: "Your subscription failed, please try again, or send me a message regarding the error from the about page.",
@@ -210,10 +212,10 @@ export function SubscriptionProvider({ children }) {
                 )}
               </div>
             </div>
-            <div className="modal-footer">
+            <div className="modal-footer d-flex">
               <button
                 type="submit"
-                className={`btn btn-sm btn-primary icon-right ${
+                className={`btn btn-sm btn-primary icon-right ms-auto ${
                   subscribing ? "loading" : ""
                 }`}
               >
