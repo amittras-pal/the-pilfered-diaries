@@ -62,7 +62,7 @@ export function generateShareLink(text, url, type) {
 
 export const setMailCookie = (email) => {
   const date = new Date();
-  date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
+  date.setTime(date.getTime() + 180 * 24 * 60 * 60 * 1000);
   const cookie = `_sub=${email}; Expires=${date.toUTCString()}; Path=/; SameSite=true; Secure=true`;
   document.cookie = cookie;
 };
