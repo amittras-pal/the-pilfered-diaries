@@ -2,7 +2,7 @@ import CommentsList from "@components/CommentsList";
 import ContentCardLarge from "@components/ContentCardLarge";
 import Markdown from "@components/Markdown";
 import Share from "@components/Share";
-import SubscriptionForm from "@components/SubscriptionForm";
+import Subscribe from "@components/Subscribe";
 import {
   APP_TITLE,
   AVG_READING_SPEED,
@@ -137,7 +137,7 @@ export default function SinglePost({
               </Link>
             </div>
           )}
-          <SubscriptionForm />
+          <Subscribe />
           <div className="d-flex justify-content-center my-3">
             <Link
               className="btn btn-outline-primary btn-sm icon-right"
