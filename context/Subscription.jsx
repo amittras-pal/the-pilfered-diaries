@@ -178,11 +178,7 @@ export function SubscriptionProvider({ children }) {
             onSubmit={handleSubmit(subscribe)}
           >
             <div className="modal-header d-flex jsutify-content-between align-items-center">
-              <h5
-                className="modal-title d-flex align-items-center gap-2"
-                id="subscribeFormLabel"
-              >
-                <IconUserPlus />
+              <h5 className="modal-title" id="subscribeFormLabel">
                 <span>Subscribe to {APP_TITLE}</span>
               </h5>
               <button
@@ -193,7 +189,7 @@ export function SubscriptionProvider({ children }) {
               </button>
             </div>
             <div className="modal-body pt-0">
-              <p className="text-muted">
+              <p className="text-primary">
                 Subscribe to {APP_TITLE} newsletter, and receive a monthly
                 digest of all new posts & stories, straight to your inbox...
               </p>
@@ -221,6 +217,17 @@ export function SubscriptionProvider({ children }) {
                   <div className="invalid-feedback">{errors.email.message}</div>
                 )}
               </div>
+              <p className="small">
+                <span className="fw-bold text-success text-decoration-underline">
+                  Note:
+                </span>
+                <span className="text-muted">
+                  {" "}
+                  If you are a subscriber and are seeing this, kindly re-enter
+                  your information. This helps me provide a better experience as
+                  you browse the content.
+                </span>
+              </p>
             </div>
             <div className="modal-footer d-flex">
               <button
