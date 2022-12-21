@@ -4,7 +4,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNotifications } from "@hooks/notifications";
 import { getMailCookie, setMailCookie } from "@lib/utils";
 import { subscriptionFormValues, subscriptionValidator } from "@lib/validators";
-import { IconCheck, IconInfoCircle, IconSend, IconX } from "@tabler/icons";
+import {
+  IconCheck,
+  IconInfoCircle,
+  IconSend,
+  IconUserPlus,
+  IconX,
+} from "@tabler/icons";
 import { getAnalytics, logEvent } from "firebase/analytics";
 import {
   addDoc,
@@ -172,8 +178,12 @@ export function SubscriptionProvider({ children }) {
             onSubmit={handleSubmit(subscribe)}
           >
             <div className="modal-header d-flex jsutify-content-between align-items-center">
-              <h5 className="modal-title" id="subscribeFormLabel">
-                Subscribe to {APP_TITLE}
+              <h5
+                className="modal-title d-flex align-items-center gap-2"
+                id="subscribeFormLabel"
+              >
+                <IconUserPlus />
+                <span>Subscribe to {APP_TITLE}</span>
               </h5>
               <button
                 className="icon-btn border-0 text-danger"
