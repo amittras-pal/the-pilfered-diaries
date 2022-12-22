@@ -56,12 +56,15 @@ export default function AddChapter({ onCompleted }) {
     }
   }, [selectedStory, setValue]);
 
-  const refreshPages = async ({ refreshPassword }) => {
+  const refreshPages = async (values) => {
     setProcessing("Refreshing Story...");
     try {
       await axios.post("/api/revalidate", {
-        pwd: refreshPassword,
-        updateType: [`stories/${selectedStory.id}`],
+        pwd: values.refreshPassword,
+        paths: [
+          `stories/${selectedStory.id}`,
+          `stories/${selectedStory.id}/${values.previousChapter}`,
+        ],
       });
       setProcessing("Processing Completed.");
       setTimeout(() => {
@@ -77,6 +80,8 @@ export default function AddChapter({ onCompleted }) {
     setProcessing("Creating Chapter...");
     try {
       const fileUrl = await getDownloadURL(snapshotRef);
+
+      // Payload for creating new chapter
       const chapter = {
         author: values.author,
         excerpt: values.excerpt,
@@ -86,28 +91,48 @@ export default function AddChapter({ onCompleted }) {
         title: values.title,
         content: fileUrl,
       };
-      const chapterRef = doc(
-        store,
-        "stories",
-        selectedStory.id,
-        "chapters",
-        values.chapterId
-      );
-      await setDoc(chapterRef, chapter);
-
-      setProcessing("Updating Story Info...");
-      const storyUpdatePayload = {
+      // Payload for updating story
+      const storyUpdate = {
         lastUpdated: Timestamp.fromDate(new Date()),
         chapterSlugs: [...selectedStory.chapterSlugs, values.chapterId],
         wip: !values.markCompleted,
         draft: false,
       };
       if (chapter.order === 1)
-        storyUpdatePayload.published = Timestamp.fromDate(new Date());
-      const storyRef = doc(store, "stories", selectedStory.id);
-      await setDoc(storyRef, storyUpdatePayload, { merge: true });
+        storyUpdate.published = Timestamp.fromDate(new Date());
 
+      // New Chapter Reference
+      const newChapter = doc(
+        store,
+        "stories",
+        selectedStory.id,
+        "chapters",
+        values.chapterId
+      );
+      // Previous Chapter Reference
+      const prevChapter = doc(
+        store,
+        "stories",
+        selectedStory.id,
+        "chapters",
+        values.previousChapter
+      );
+      // Story Reference
+      const storyRef = doc(store, "stories", selectedStory.id);
+
+      // Update All in parallel.
+      await Promise.all([
+        setDoc(newChapter, chapter),
+        setDoc(
+          prevChapter,
+          { nextChapter: values.chapterId },
+          { merge: true }
+        ),
+        setDoc(storyRef, storyUpdate, { merge: true }),
+      ]);
       setProcessing("Story Updated.");
+
+      // Revalidate static pages.
       refreshPages(values);
     } catch (error) {
       console.error(error);
