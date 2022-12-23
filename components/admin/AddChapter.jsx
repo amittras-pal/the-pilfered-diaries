@@ -1,6 +1,7 @@
 import { storage, store } from "@fb/client";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { chapterFormValues, chapterValidator } from "@lib/validators";
+import { refreshPages } from "@services/client";
 import axios from "axios";
 import {
   collection,
@@ -56,26 +57,6 @@ export default function AddChapter({ onCompleted }) {
     }
   }, [selectedStory, setValue]);
 
-  const refreshPages = async (values) => {
-    setProcessing("Refreshing Story...");
-    try {
-      await axios.post("/api/revalidate", {
-        pwd: values.refreshPassword,
-        paths: [
-          `stories/${selectedStory.id}`,
-          `stories/${selectedStory.id}/${values.previousChapter}`,
-        ],
-      });
-      setProcessing("Processing Completed.");
-      setTimeout(() => {
-        reset();
-        onCompleted();
-      }, 500);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const addChapterDoc = async (snapshotRef, values) => {
     setProcessing("Creating Chapter...");
     try {
@@ -123,17 +104,20 @@ export default function AddChapter({ onCompleted }) {
       // Update All in parallel.
       await Promise.all([
         setDoc(newChapter, chapter),
-        setDoc(
-          prevChapter,
-          { nextChapter: values.chapterId },
-          { merge: true }
-        ),
+        setDoc(prevChapter, { nextChapter: values.chapterId }, { merge: true }),
         setDoc(storyRef, storyUpdate, { merge: true }),
       ]);
-      setProcessing("Story Updated.");
 
-      // Revalidate static pages.
-      refreshPages(values);
+      setProcessing("Refreshing Story...");
+      await refreshPages(values.refreshPassword, [
+        `stories/${selectedStory.id}`,
+        `stories/${selectedStory.id}/${values.previousChapter}`,
+      ]);
+      setProcessing("Processing Completed.");
+      setTimeout(() => {
+        reset();
+        onCompleted();
+      }, 500);
     } catch (error) {
       console.error(error);
     }
