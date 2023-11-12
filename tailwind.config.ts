@@ -6,8 +6,15 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  theme: {},
+  theme: {
+    extend: {
+      grayscale: {
+        25: "25%",
+        50: "50%",
+        75: "75%",
+      },
+    },
+  },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
 };
-
 export default config;
