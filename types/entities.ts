@@ -41,6 +41,17 @@ export interface PostDoc {
   title: string;
 }
 
+export interface CommentDoc {
+  approved: boolean;
+  body: string;
+  date: Timestamp;
+  email: string;
+  target: string;
+  title: string;
+  type: string;
+  userName: string;
+}
+
 export interface Chapter extends Omit<ChapterDoc, "published"> {
   published: string;
 }
@@ -58,6 +69,11 @@ export interface Story
 export interface Post extends Omit<PostDoc, "published"> {
   published: string;
   slug: string;
+}
+
+export interface Comment extends Omit<CommentDoc, "date"> {
+  date: string;
+  id: string;
 }
 
 export interface SiteImageCfg {

@@ -9,7 +9,7 @@ export default function Post(post: PostWOContent) {
   return (
     <article className="card card-compact md:card-side rounded-none border border-t-0 border-r-0 border-l-0 border-b-gray-700/90 last:border-b-transparent relative group">
       <figure className="p-2 pt-4 md:pt-2 basis-1/3">
-        <Link href={`/stories/${post.slug}`}>
+        <Link href={`/posts/${post.slug}`}>
           <Image
             width={1280}
             height={720}
@@ -21,7 +21,7 @@ export default function Post(post: PostWOContent) {
       </figure>
       <div className="card-body basis-2/3 gap-1 md:gap-2">
         <Link
-          href={`/stories/${post.slug}`}
+          href={`/posts/${post.slug}`}
           className="card-title text-gray-200 hover:text-violet-400 focus:text-violet-400 outline-none transition-colors font-serif whitespace-nowrap"
         >
           {post.title}

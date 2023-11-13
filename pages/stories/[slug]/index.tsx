@@ -8,11 +8,18 @@ import StoryHeader from "../../../components/stories/StoryHeader";
 import { REVAL_TIME } from "../../../constants";
 import {
   getAllPublishedStories,
+  getComments,
   getSingleStory,
 } from "../../../firebase/server.functions";
-import { StoryDoc } from "../../../types/entities";
+import { CommentDoc, StoryDoc, Comment } from "../../../types/entities";
 import { SingleStoryProps } from "../../../types/page";
-import { dateFormat, fbTimestampToDateFormat } from "../../../utils/date.utils";
+import {
+  dateFormat,
+  dateTimeFormat,
+  fbTimestampToDateFormat,
+} from "../../../utils/date.utils";
+import CommentsList from "../../../components/comments/CommentsList";
+import Divider from "../../../components/Divider";
 
 export default function SingleStory(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -23,7 +30,14 @@ export default function SingleStory(
       <div id="content" className="my-6 max-w-screen-xl mx-auto px-3 md:px-4">
         <h2 className="text-2xl text-violet-300 font-serif">Preface</h2>
         <Markdown {...props.preface} />
+        <Divider direction="horizontal" className="my-3" />
         <ChaptersList chapters={props.chapters} slug={props.metadata.slug} />
+        <Divider direction="horizontal" className="my-3" />
+        <CommentsList
+          comments={props.comments}
+          itemTitle={props.metadata.title}
+          itemId={props.metadata.slug}
+        />
       </div>
     </>
   );
@@ -46,6 +60,7 @@ export const getStaticProps: GetStaticProps<
   if (story.draft)
     return { redirect: { destination: "/content-x", statusCode: 307 } };
 
+  const commentsRes = await getComments("stories", params?.slug ?? "");
   const prefaceFile = await axios.get(story.content ?? "");
   const { content: preface } = grayMatter(prefaceFile.data);
 
@@ -70,11 +85,21 @@ export const getStaticProps: GetStaticProps<
   delete metadata.chapters;
   delete metadata.content;
 
+  const comments = commentsRes.docs.map((cm) => {
+    const cmnt = cm.data() as CommentDoc;
+    return {
+      ...cmnt,
+      date: fbTimestampToDateFormat(cmnt.date, dateTimeFormat),
+      id: cm.id,
+    };
+  });
+
   return {
     props: {
       preface: await serialize(preface),
       metadata,
       chapters,
+      comments,
     },
     revalidate: REVAL_TIME,
   };

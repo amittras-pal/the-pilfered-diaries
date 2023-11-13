@@ -13,7 +13,7 @@ export default function ChapterHeader({
   chapter,
   story,
   readTime,
-}: Omit<SingleChapterProps, "content">) {
+}: Omit<SingleChapterProps, "content" | "comments">) {
   return (
     <header
       className="hero bg-base-200 relative h-[75vh] md:h-[50vh] place-content-end"

@@ -1,5 +1,5 @@
 import { ReadTimeResults } from "reading-time";
-import { Chapter, Post, SiteImageCfg, Story } from "./entities";
+import { Chapter, Comment, Post, SiteImageCfg, Story } from "./entities";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 
 // Some Global items
@@ -29,21 +29,25 @@ export interface PostsListProps {
 
 export interface SinglePostMetadata extends Omit<Post, "content" | "slug"> {
   readingTime: ReadTimeResults;
+  id: string;
 }
 export interface SinglePostProps {
   content: MarkdownContent;
   metadata: SinglePostMetadata;
+  comments: Comment[];
 }
 
 export interface SingleStoryProps {
   preface: MarkdownContent;
   metadata: StoryWOChaptersNContent;
   chapters: ChapterWOContent[];
+  comments: Comment[];
 }
 
 export interface SingleChapterProps {
   chapter: ChapterWOContent;
-  story: Pick<Story, "title" | "cover">;
+  story: Pick<Story, "title" | "cover" | "slug">;
   content: MarkdownContent;
   readTime: ReadTimeResults;
+  comments: Comment[];
 }

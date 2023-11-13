@@ -7,13 +7,20 @@ import readingTime from "reading-time";
 import { AVG_WPM, REVAL_TIME } from "../../../constants";
 import {
   getAllPublishedStories,
+  getComments,
   getSingleStory,
 } from "../../../firebase/server.functions";
-import { StoryDoc } from "../../../types/entities";
+import { CommentDoc, StoryDoc } from "../../../types/entities";
 import { SingleChapterProps } from "../../../types/page";
-import { dateFormat, fbTimestampToDateFormat } from "../../../utils/date.utils";
+import {
+  dateFormat,
+  dateTimeFormat,
+  fbTimestampToDateFormat,
+} from "../../../utils/date.utils";
 import ChapterHeader from "../../../components/stories/ChapterHeader";
 import Markdown from "../../../components/markdown/Markdown";
+import Divider from "../../../components/Divider";
+import CommentsList from "../../../components/comments/CommentsList";
 
 export default function SingleChapter(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -27,6 +34,12 @@ export default function SingleChapter(
       />
       <div id="content" className="my-6 max-w-screen-xl mx-auto px-3 md:px-4">
         <Markdown {...props.content} />
+        <Divider direction="horizontal" className="my-3" />
+        <CommentsList
+          comments={props.comments}
+          itemTitle={props.story.title}
+          itemId={props.story.slug}
+        />
       </div>
     </>
   );
@@ -69,11 +82,21 @@ export const getStaticProps: GetStaticProps<
   if (!chapter)
     return { redirect: { destination: "/content-x", statusCode: 307 } };
 
+  const commentsRes = await getComments("stories", params?.slug ?? "");
   const file = await axios.get(chapter.content ?? "");
   const { content } = grayMatter(file.data);
   const readTime = readingTime(content, { wordsPerMinute: AVG_WPM });
 
   delete chapter.content;
+
+  const comments = commentsRes.docs.map((cm) => {
+    const cmnt = cm.data() as CommentDoc;
+    return {
+      ...cmnt,
+      date: fbTimestampToDateFormat(cmnt.date, dateTimeFormat),
+      id: cm.id,
+    };
+  });
 
   const props = {
     chapter: {
@@ -82,7 +105,8 @@ export const getStaticProps: GetStaticProps<
     },
     content: await serialize(content),
     readTime: readTime,
-    story: { title: story.title, cover: story.cover },
+    story: { title: story.title, cover: story.cover, slug: storyRes.id },
+    comments,
   };
 
   return { props, revalidate: REVAL_TIME };

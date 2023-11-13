@@ -45,3 +45,16 @@ export function getSinglePost(slug: string) {
 export function getSingleStory(slug: string) {
   return firestore.doc("stories/" + slug).get();
 }
+
+export function getComments(
+  contentType: "stories" | "posts",
+  contentId: string
+) {
+  return firestore
+    .collection("comments")
+    .where("type", "==", contentType)
+    .where("target", "==", contentId)
+    .where("approved", "==", true)
+    .orderBy("date", "desc")
+    .get();
+}
