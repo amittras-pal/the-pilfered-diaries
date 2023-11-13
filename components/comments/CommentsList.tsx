@@ -1,6 +1,7 @@
 import React from "react";
 import { Comment } from "../../types/entities";
 import { IconCircle, IconMessage2Plus } from "@tabler/icons-react";
+import dynamic from "next/dynamic";
 
 interface CommentsListProps {
   comments: Comment[];
@@ -8,17 +9,30 @@ interface CommentsListProps {
   itemId: string;
 }
 
+const CommentForm = dynamic(() => import("./CommentForm"), {
+  ssr: false,
+  loading: () => (
+    <p className="text-xs font-thin my-3">Loading Comment Editor...</p>
+  ),
+});
+
 export default function CommentsList(props: CommentsListProps) {
+  const [showForm, setShowForm] = React.useState<boolean>(false);
+  const toggleForm = () => setShowForm((v) => !v);
+
   return (
     <>
+      {showForm && <CommentForm onClose={toggleForm} />}
       <div className="flex justify-between items-start">
         <p className="text-xl text-violet-300 font-serif">
           Comments on {props.itemTitle}
         </p>
-        <button className="btn btn-sm btn-ghost">
-          <IconMessage2Plus size={18} />
-          Add Comment
-        </button>
+        {!showForm && (
+          <button className="btn btn-sm btn-ghost" onClick={toggleForm}>
+            <IconMessage2Plus size={18} />
+            Add Comment
+          </button>
+        )}
       </div>
       <div className="flex flex-col divide-y divide-gray-700">
         {props.comments.map((comment) => (

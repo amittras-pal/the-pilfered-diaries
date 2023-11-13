@@ -1,4 +1,4 @@
-// TODO: utilize this properly.
+// TODO: revive this.
 
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
