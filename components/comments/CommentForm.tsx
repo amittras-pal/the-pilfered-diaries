@@ -1,12 +1,11 @@
 "use client";
 
-import React from "react";
-import { object, string, InferType } from "yup";
-import { useForm, SubmitHandler } from "react-hook-form";
+import Input from "@components/form/Input";
+import TextArea from "@components/form/TextArea";
 import { yupResolver } from "@hookform/resolvers/yup";
-import Input from "../form/Input";
-import TextArea from "../form/TextArea";
 import { IconMessage2Check, IconMessage2X } from "@tabler/icons-react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { InferType, object, string } from "yup";
 
 const commentSchema = object().shape({
   userName: string().required("Name is required."),

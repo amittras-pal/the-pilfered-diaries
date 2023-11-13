@@ -1,9 +1,8 @@
-import React from "react";
-import { PostWOContent } from "../../types/page";
-import Link from "next/link";
+import PostMeta from "@components/PostMeta";
+import TagsList from "@components/TagsList";
+import { PostWOContent } from "@typeDefs/page";
 import Image from "next/image";
-import TagsList from "../TagsList";
-import PostMeta from "../PostMeta";
+import Link from "next/link";
 
 interface StoriesProps {
   data: PostWOContent[];

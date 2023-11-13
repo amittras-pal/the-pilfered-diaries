@@ -1,6 +1,5 @@
+import { SITE_TITLE } from "@constants/app";
 import { IconMenu2 } from "@tabler/icons-react";
-import React from "react";
-import { SITE_TITLE } from "../constants";
 import Link from "next/link";
 
 export default function Navbar() {

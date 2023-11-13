@@ -13,8 +13,17 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./*"]
+      "@components/*": ["components/*"],
+      "@constants/*": ["constants/*"],
+      // "@context/*": ["context/*"],
+      "@firebase/*": ["firebase/*"],
+      // "@hooks/*": ["hooks/*"],
+      "@resources/*": ["resources/*"],
+      "@styles/*": ["styles/*"],
+      "@typeDefs/*": ["types/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

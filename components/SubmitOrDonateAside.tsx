@@ -1,7 +1,6 @@
-import React from "react";
-import { SITE_TITLE } from "../constants";
-import Link from "next/link";
+import { SITE_TITLE } from "@constants/app";
 import { IconArrowRight } from "@tabler/icons-react";
+import Link from "next/link";
 
 export default function SubmitOrDonateAside() {
   return (

@@ -1,7 +1,6 @@
-import React from "react";
-import { Post } from "../types/entities";
 import { IconPoint } from "@tabler/icons-react";
-import { PostWOContent } from "../types/page";
+import { Post } from "@typeDefs/entities";
+import { PostWOContent } from "@typeDefs/page";
 
 interface StoryMetaProps {
   post: Post | PostWOContent;

@@ -1,11 +1,11 @@
+import SubmitOrDonateAside from "@components/SubmitOrDonateAside";
+import Story from "@components/stories/Story";
+import { REVAL_TIME, SITE_TITLE } from "@constants/app";
+import { getStories } from "@firebase/server.functions";
+import { StoryDoc } from "@typeDefs/entities";
+import { StoriesListProps } from "@typeDefs/page";
+import { dateFormat, fbTimestampToDateFormat } from "@utils/date.utils";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import SubmitOrDonateAside from "../../components/SubmitOrDonateAside";
-import Story from "../../components/stories/Story";
-import { REVAL_TIME, SITE_TITLE } from "../../constants";
-import { getStories } from "../../firebase/server.functions";
-import { StoryDoc } from "../../types/entities";
-import { StoriesListProps } from "../../types/page";
-import { dateFormat, fbTimestampToDateFormat } from "../../utils/date.utils";
 
 export default function StoriesLIst({
   stories,

@@ -1,17 +1,17 @@
+import Header from "@components/home/Header";
+import Posts from "@components/home/Posts";
+import Stories from "@components/home/Stories";
+import SubmitContent from "@components/home/SubmitContent";
+import { REVAL_TIME } from "@constants/app";
 import {
   getPosts,
   getSiteImageCfg,
   getStories,
-} from "@/firebase/server.functions";
+} from "@firebase/server.functions";
+import { PostDoc, SiteImageCfg, StoryDoc } from "@typeDefs/entities";
+import { HomeProps } from "@typeDefs/page";
+import { dateFormat, fbTimestampToDateFormat } from "@utils/date.utils";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import Header from "../components/home/Header";
-import { PostDoc, SiteImageCfg, StoryDoc } from "../types/entities";
-import { HomeProps } from "../types/page";
-import { dateFormat, fbTimestampToDateFormat } from "../utils/date.utils";
-import Stories from "../components/home/Stories";
-import { REVAL_TIME } from "../constants";
-import Posts from "../components/home/Posts";
-import SubmitContent from "../components/home/SubmitContent";
 
 export default function Home({
   stories,

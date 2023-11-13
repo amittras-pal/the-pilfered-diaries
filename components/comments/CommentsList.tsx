@@ -1,7 +1,7 @@
-import React from "react";
-import { Comment } from "../../types/entities";
 import { IconCircle, IconMessage2Plus } from "@tabler/icons-react";
+import { Comment } from "@typeDefs/entities";
 import dynamic from "next/dynamic";
+import React from "react";
 
 interface CommentsListProps {
   comments: Comment[];

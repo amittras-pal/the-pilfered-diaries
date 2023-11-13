@@ -1,5 +1,4 @@
-import React from "react";
-import { DISPLAY_TAGS } from "../constants";
+import { DISPLAY_TAGS } from "@constants/app";
 
 interface TagsListProps {
   tags: string[];

@@ -1,9 +1,8 @@
-import React from "react";
-import { SITE_TITLE } from "../../constants";
-import Link from "next/link";
+import { SITE_TITLE } from "@constants/app";
+import logo from "@resources/tpd-logo-w.svg";
 import { IconArrowRight } from "@tabler/icons-react";
-import logo from "@/resources/tpd-logo-w.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function SubmitContent() {
   return (

@@ -1,12 +1,11 @@
-import React from "react";
-import { PostsListProps } from "../../types/page";
+import SubmitOrDonateAside from "@components/SubmitOrDonateAside";
+import Post from "@components/posts/Post";
+import { REVAL_TIME, SITE_TITLE } from "@constants/app";
+import { getPosts } from "@firebase/server.functions";
+import { PostDoc } from "@typeDefs/entities";
+import { PostsListProps } from "@typeDefs/page";
+import { dateFormat, fbTimestampToDateFormat } from "@utils/date.utils";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import { getPosts } from "../../firebase/server.functions";
-import { PostDoc } from "../../types/entities";
-import { dateFormat, fbTimestampToDateFormat } from "../../utils/date.utils";
-import { REVAL_TIME, SITE_TITLE } from "../../constants";
-import Post from "../../components/posts/Post";
-import SubmitOrDonateAside from "../../components/SubmitOrDonateAside";
 
 export default function PostsList({
   posts,

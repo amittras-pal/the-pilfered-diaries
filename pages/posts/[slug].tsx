@@ -1,27 +1,26 @@
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
-import React from "react";
+import Divider from "@components/Divider";
+import CommentsList from "@components/comments/CommentsList";
+import Markdown from "@components/markdown/Markdown";
+import SinglePostHeader from "@components/posts/PostHeader";
+import { AVG_WPM, REVAL_TIME } from "@constants/app";
 import {
   getAllPublishedPosts,
   getComments,
   getSinglePost,
-} from "../../firebase/server.functions";
-import { SinglePostProps } from "../../types/page";
-import axios from "axios";
-import { CommentDoc, PostDoc } from "../../types/entities";
-import grayMatter from "gray-matter";
+} from "@firebase/server.functions";
+import { CommentDoc, PostDoc } from "@typeDefs/entities";
+import { SinglePostProps } from "@typeDefs/page";
 import {
   dateFormat,
   dateTimeFormat,
   fbTimestampToDateFormat,
-} from "../../utils/date.utils";
-import readingTime from "reading-time";
-import { AVG_WPM, REVAL_TIME } from "../../constants";
+} from "@utils/date.utils";
+import axios from "axios";
+import grayMatter from "gray-matter";
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
-import SinglePostHeader from "../../components/posts/PostHeader";
 import { useRouter } from "next/router";
-import Markdown from "../../components/markdown/Markdown";
-import Divider from "../../components/Divider";
-import CommentsList from "../../components/comments/CommentsList";
+import readingTime from "reading-time";
 
 export default function SinglePost(
   props: InferGetStaticPropsType<typeof getStaticProps>

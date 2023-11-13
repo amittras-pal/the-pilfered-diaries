@@ -1,26 +1,26 @@
+import Divider from "@components/Divider";
+import CommentsList from "@components/comments/CommentsList";
+import Markdown from "@components/markdown/Markdown";
+import ChapterHeader from "@components/stories/ChapterHeader";
+import { AVG_WPM, REVAL_TIME } from "@constants/app";
+import {
+  getAllPublishedStories,
+  getComments,
+  getSingleStory,
+} from "@firebase/server.functions";
+import { CommentDoc, StoryDoc } from "@typeDefs/entities";
+import { SingleChapterProps } from "@typeDefs/page";
+import {
+  dateFormat,
+  dateTimeFormat,
+  fbTimestampToDateFormat,
+} from "@utils/date.utils";
 import axios from "axios";
 import grayMatter from "gray-matter";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import { ParsedUrlQuery } from "querystring";
 import readingTime from "reading-time";
-import { AVG_WPM, REVAL_TIME } from "../../../constants";
-import {
-  getAllPublishedStories,
-  getComments,
-  getSingleStory,
-} from "../../../firebase/server.functions";
-import { CommentDoc, StoryDoc } from "../../../types/entities";
-import { SingleChapterProps } from "../../../types/page";
-import {
-  dateFormat,
-  dateTimeFormat,
-  fbTimestampToDateFormat,
-} from "../../../utils/date.utils";
-import ChapterHeader from "../../../components/stories/ChapterHeader";
-import Markdown from "../../../components/markdown/Markdown";
-import Divider from "../../../components/Divider";
-import CommentsList from "../../../components/comments/CommentsList";
 
 export default function SingleChapter(
   props: InferGetStaticPropsType<typeof getStaticProps>

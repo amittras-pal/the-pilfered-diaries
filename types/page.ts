@@ -1,6 +1,6 @@
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { ReadTimeResults } from "reading-time";
 import { Chapter, Comment, Post, SiteImageCfg, Story } from "./entities";
-import { MDXRemoteSerializeResult } from "next-mdx-remote";
 
 // Some Global items
 export type MarkdownContent = MDXRemoteSerializeResult<

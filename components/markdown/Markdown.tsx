@@ -1,5 +1,5 @@
+import { MarkdownContent } from "@typeDefs/page";
 import { MDXRemote } from "next-mdx-remote";
-import { MarkdownContent } from "../../types/page";
 import { components } from "./plugins";
 
 export default function Markdown(props: MarkdownContent) {

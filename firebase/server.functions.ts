@@ -1,4 +1,4 @@
-import firestore from "@/firebase/server.config";
+import firestore from "./server.config";
 
 // List of published stories.
 export function getStories(limit: number) {

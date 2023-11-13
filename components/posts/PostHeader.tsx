@@ -1,7 +1,6 @@
-import React from "react";
-import { SinglePostMetadata } from "../../types/page";
 import { IconPoint } from "@tabler/icons-react";
-import { getReadingTime } from "../../utils/app.utils";
+import { SinglePostMetadata } from "@typeDefs/page";
+import { getReadingTime } from "@utils/app.utils";
 
 export default function SinglePostHeader({
   metadata,

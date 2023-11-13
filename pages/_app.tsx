@@ -1,7 +1,7 @@
-import "@/styles/globals.css";
+import Navbar from "@components/Navbar";
+import ScrollReset from "@components/ScrollReset";
+import "@styles/globals.css";
 import type { AppProps } from "next/app";
-import Navbar from "../components/Navbar";
-import ScrollReset from "../components/ScrollReset";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

@@ -1,7 +1,6 @@
-import React from "react";
-import { Story } from "../types/entities";
 import { IconPoint } from "@tabler/icons-react";
-import { StoryWOChaptersNContent } from "../types/page";
+import { Story } from "@typeDefs/entities";
+import { StoryWOChaptersNContent } from "@typeDefs/page";
 
 interface StoryMetaProps {
   story: Story | StoryWOChaptersNContent;

@@ -1,25 +1,25 @@
-import axios from "axios";
-import grayMatter from "gray-matter";
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
-import { serialize } from "next-mdx-remote/serialize";
-import Markdown from "../../../components/markdown/Markdown";
-import ChaptersList from "../../../components/stories/ChaptersList";
-import StoryHeader from "../../../components/stories/StoryHeader";
-import { REVAL_TIME } from "../../../constants";
+import Divider from "@components/Divider";
+import CommentsList from "@components/comments/CommentsList";
+import Markdown from "@components/markdown/Markdown";
+import ChaptersList from "@components/stories/ChaptersList";
+import StoryHeader from "@components/stories/StoryHeader";
+import { REVAL_TIME } from "@constants/app";
 import {
   getAllPublishedStories,
   getComments,
   getSingleStory,
-} from "../../../firebase/server.functions";
-import { CommentDoc, StoryDoc, Comment } from "../../../types/entities";
-import { SingleStoryProps } from "../../../types/page";
+} from "@firebase/server.functions";
+import { CommentDoc, StoryDoc } from "@typeDefs/entities";
+import { SingleStoryProps } from "@typeDefs/page";
 import {
   dateFormat,
   dateTimeFormat,
   fbTimestampToDateFormat,
-} from "../../../utils/date.utils";
-import CommentsList from "../../../components/comments/CommentsList";
-import Divider from "../../../components/Divider";
+} from "@utils/date.utils";
+import axios from "axios";
+import grayMatter from "gray-matter";
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import { serialize } from "next-mdx-remote/serialize";
 
 export default function SingleStory(
   props: InferGetStaticPropsType<typeof getStaticProps>

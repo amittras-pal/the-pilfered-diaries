@@ -1,10 +1,9 @@
+import StoryMeta from "@components/StoryMeta";
+import TagsList from "@components/TagsList";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
+import { StoryWOChaptersNContent } from "@typeDefs/page";
 import Image from "next/image";
 import Link from "next/link";
-import { DISPLAY_TAGS } from "../../constants";
-import { StoryWOChaptersNContent } from "../../types/page";
-import StoryMeta from "../StoryMeta";
-import TagsList from "../TagsList";
 
 interface StoriesProps {
   data: StoryWOChaptersNContent[];

@@ -1,7 +1,6 @@
-import React from "react";
-import { SiteImageCfg } from "../../types/entities";
-import { INSTA_HANDLE, INSTA_LINK, SITE_TITLE } from "../../constants";
+import { INSTA_HANDLE, INSTA_LINK, SITE_TITLE } from "@constants/app";
 import { IconBrandInstagram } from "@tabler/icons-react";
+import { SiteImageCfg } from "@typeDefs/entities";
 
 export default function Header({ cfg }: { cfg: SiteImageCfg }) {
   return (
