@@ -6,29 +6,37 @@
   @apply h-screen w-screen flex flex-col;
 }
 
+/* TODO: move into css-module */
 @layer components {
-  .md-p {
-    @apply [&>p]:mb-4 [&>p]:text-[1em] [&>p]:transition-all;
-  }
-  .md-a {
-    @apply [&>a]:text-[1em] [&>a]:no-underline [&>a]:text-violet-500 [&>a]:transition-colors
-      [&>p>a]:text-[1em] [&>p>a]:no-underline [&>p>a]:text-violet-500 [&>p>a]:transition-colors;
-  }
-  .md-img {
-    @apply [&>img]:w-full [&>img]:h-auto [&>img]:rounded-lg [&>img]:mb-3;
-  }
-  .md-blockquote {
-    @apply p-4 border-l-[3] border-gray-700/50;
-  }
-  .md-h2 {
-    @apply [&>h2]:text-3xl [&>h2]:mb-4 [&>h2]:font-sans;
-  }
-  .md-h3 {
-    @apply [&>h3]:text-2xl [&>h3]:mb-3 [&>h3]:font-sans;
-  }
-
   .markdown {
-    @apply font-serif text-gray-300 px-3 md:px-4
-      md-h2 md-h3 md-p md-a md-img md-blockquote;
+    @apply font-serif text-gray-300;
   }
+}
+
+.markdown p {
+  @apply mb-4 text-[1em] transition-all;
+}
+
+.markdown p:last-child {
+  margin-bottom: 0 !important;
+}
+
+.markdown a {
+  @apply text-[1em] no-underline text-violet-500 transition-colors hover:text-violet-300;
+}
+
+.markdown h2 {
+  @apply text-3xl mb-4 font-sans;
+}
+
+.markdown h3 {
+  @apply text-2xl mb-3 font-sans;
+}
+
+.markdown blockquote {
+  @apply p-4 border-l-[3] border-gray-700/50;
+}
+
+.markdown img {
+  @apply w-full h-auto rounded-lg mb-3;
 }

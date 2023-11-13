@@ -34,6 +34,14 @@ export function getAllPublishedPosts() {
   return firestore.collection("posts").where("draft", "==", false).get();
 }
 
+export function getAllPublishedStories() {
+  return firestore.collection("stories").where("draft", "==", false).get();
+}
+
 export function getSinglePost(slug: string) {
   return firestore.doc("posts/" + slug).get();
+}
+
+export function getSingleStory(slug: string) {
+  return firestore.doc("stories/" + slug).get();
 }

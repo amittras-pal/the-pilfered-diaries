@@ -1,15 +1,16 @@
 import React from "react";
-import { SinglePostMetaData } from "../../types/page";
+import { SinglePostMetadata } from "../../types/page";
 import { IconPoint } from "@tabler/icons-react";
+import { getReadingTime } from "../../utils/app.utils";
 
 export default function SinglePostHeader({
   metadata,
 }: {
-  metadata: SinglePostMetaData;
+  metadata: SinglePostMetadata;
 }) {
   return (
     <header
-      className="hero bg-base-200 relative h-[75vh] md:h-[50vh]"
+      className="hero bg-base-200 relative h-[75vh] md:h-[50vh] place-content-end"
       style={{ backgroundImage: `url(${metadata.cover})` }}
     >
       <div className="hero-content text-center bg-gray-700/20 backdrop-blur-sm rounded-md shadow-lg">
@@ -18,9 +19,7 @@ export default function SinglePostHeader({
           <p className="my-3 flex gap-1 items-center justify-center text-white font-serif text-sm">
             <span>{metadata.author}</span>
             <IconPoint size={16} />
-            <span>
-              {metadata.readingTime.text} ({metadata.readingTime.words} words)
-            </span>
+            <span>{getReadingTime(metadata.readingTime)}</span>
             <IconPoint size={16} />
             <span>{metadata.published}</span>
           </p>

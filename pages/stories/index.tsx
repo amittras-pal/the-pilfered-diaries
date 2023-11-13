@@ -1,10 +1,10 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import SubmitOrDonateAside from "../../components/SubmitOrDonateAside";
 import Story from "../../components/stories/Story";
-import { REVALIDATION_TIME, SITE_TITLE } from "../../constants";
+import { REVAL_TIME, SITE_TITLE } from "../../constants";
 import { getStories } from "../../firebase/server.functions";
 import { StoryDoc } from "../../types/entities";
-import { StoriesPageProps } from "../../types/page";
+import { StoriesListProps } from "../../types/page";
 import { dateFormat, fbTimestampToDateFormat } from "../../utils/date.utils";
 
 export default function StoriesLIst({
@@ -29,7 +29,7 @@ export default function StoriesLIst({
   );
 }
 
-export const getStaticProps: GetStaticProps<StoriesPageProps> = async (
+export const getStaticProps: GetStaticProps<StoriesListProps> = async (
   _ctx
 ) => {
   const response = await getStories(20);
@@ -50,6 +50,6 @@ export const getStaticProps: GetStaticProps<StoriesPageProps> = async (
 
   return {
     props: { stories },
-    revalidate: REVALIDATION_TIME,
+    revalidate: REVAL_TIME,
   };
 };

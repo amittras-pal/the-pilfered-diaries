@@ -6,10 +6,10 @@ import {
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Header from "../components/home/Header";
 import { PostDoc, SiteImageCfg, StoryDoc } from "../types/entities";
-import { HomePageProps } from "../types/page";
+import { HomeProps } from "../types/page";
 import { dateFormat, fbTimestampToDateFormat } from "../utils/date.utils";
 import Stories from "../components/home/Stories";
-import { REVALIDATION_TIME } from "../constants";
+import { REVAL_TIME } from "../constants";
 import Posts from "../components/home/Posts";
 import SubmitContent from "../components/home/SubmitContent";
 
@@ -34,7 +34,7 @@ export default function Home({
   );
 }
 
-export const getStaticProps: GetStaticProps<HomePageProps> = async (_ctx) => {
+export const getStaticProps: GetStaticProps<HomeProps> = async (_ctx) => {
   const [storiesRes, postsRes, imageCfgRes] = await Promise.all([
     getStories(5),
     getPosts("owned", 5),
@@ -74,6 +74,6 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async (_ctx) => {
       posts,
       headerCfg: imageCfgRes.data() as SiteImageCfg,
     },
-    revalidate: REVALIDATION_TIME,
+    revalidate: REVAL_TIME,
   };
 };

@@ -1,17 +1,17 @@
 import { MDXRemote } from "next-mdx-remote";
-import Link from "next/link";
-import AuthorNoteSeparator from "./AuthorNoteSeparator";
-import SectionBreak from "./SectionBreak";
+import { MarkdownContent } from "../../types/page";
+import { components } from "./plugins";
 
-export default function Markdown({ source }: { source: any }) {
+export default function Markdown(props: MarkdownContent) {
+  /**
+   * // TODO:  Validate behaviours with the existing one.
+   *        - text size control
+   *        - fragment linking
+   *        - ... other features from existing app.
+   */
   return (
     <div className="markdown" style={{ fontSize: `${14}px` }}>
-      <MDXRemote
-        compiledSource={source}
-        components={{ SectionBreak, AuthorNoteSeparator, Link }}
-        frontmatter={null}
-        scope={null}
-      />
+      <MDXRemote {...props} components={components} />
     </div>
   );
 }

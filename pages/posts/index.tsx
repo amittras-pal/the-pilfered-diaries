@@ -1,10 +1,10 @@
 import React from "react";
-import { PostsPageProps } from "../../types/page";
+import { PostsListProps } from "../../types/page";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { getPosts } from "../../firebase/server.functions";
 import { PostDoc } from "../../types/entities";
 import { dateFormat, fbTimestampToDateFormat } from "../../utils/date.utils";
-import { REVALIDATION_TIME, SITE_TITLE } from "../../constants";
+import { REVAL_TIME, SITE_TITLE } from "../../constants";
 import Post from "../../components/posts/Post";
 import SubmitOrDonateAside from "../../components/SubmitOrDonateAside";
 
@@ -30,7 +30,7 @@ export default function PostsList({
   );
 }
 
-export const getStaticProps: GetStaticProps<PostsPageProps> = async (_ctx) => {
+export const getStaticProps: GetStaticProps<PostsListProps> = async (_ctx) => {
   const response = await getPosts("all", 25);
   const posts = response.docs.map((doc) => {
     const post = doc.data() as PostDoc;
@@ -45,6 +45,6 @@ export const getStaticProps: GetStaticProps<PostsPageProps> = async (_ctx) => {
 
   return {
     props: { posts },
-    revalidate: REVALIDATION_TIME,
+    revalidate: REVAL_TIME,
   };
 };

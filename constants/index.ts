@@ -1,7 +1,7 @@
 export const SITE_TITLE = process.env.NEXT_PUBLIC_SITE_TITLE;
 export const DISPLAY_TAGS = 3;
 export const SUB_POPUP_DELAY = 15000;
-export const REVALIDATION_TIME = 120; // TODO: this is 2 minutes, set it for 1 day
+export const REVAL_TIME = 120; // TODO: this is 2 minutes, set it for 1 day
 export const AVG_WPM = 250; // words per minute.
 
 export const APP_TITLE = "The Pilfered Diaries";

@@ -4,15 +4,15 @@ import {
   getAllPublishedPosts,
   getSinglePost,
 } from "../../firebase/server.functions";
-import { SinglePostPageProps } from "../../types/page";
+import { SinglePostProps } from "../../types/page";
 import axios from "axios";
 import { PostDoc } from "../../types/entities";
 import grayMatter from "gray-matter";
 import { dateFormat, fbTimestampToDateFormat } from "../../utils/date.utils";
 import readingTime from "reading-time";
-import { AVG_WPM, REVALIDATION_TIME } from "../../constants";
+import { AVG_WPM, REVAL_TIME } from "../../constants";
 import { serialize } from "next-mdx-remote/serialize";
-import SinglePostHeader from "../../components/posts/SinglePostHeader";
+import SinglePostHeader from "../../components/posts/PostHeader";
 import { useRouter } from "next/router";
 import Markdown from "../../components/markdown/Markdown";
 
@@ -27,8 +27,8 @@ export default function SinglePost(
   return (
     <>
       <SinglePostHeader metadata={props.metadata} />
-      <div id="content" className="my-6 max-w-screen-xl mx-auto">
-        <Markdown source={props.content.compiledSource} />
+      <div id="content" className="my-6 max-w-screen-xl mx-auto px-3 md:px-4">
+        <Markdown {...props.content} />
       </div>
     </>
   );
@@ -41,15 +41,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps<
-  SinglePostPageProps,
+  SinglePostProps,
   { slug: string }
 > = async (ctx) => {
   const { params } = ctx;
   const postRes = await getSinglePost(params?.slug ?? "");
   const post = postRes.data() as PostDoc;
 
+  if (post.draft)
+    return { redirect: { destination: "/content-x", statusCode: 307 } };
+
   const file = await axios.get(post.content ?? "");
   const { content } = grayMatter(file.data);
+
+  delete post.content;
 
   const meta = {
     ...post,
@@ -66,6 +71,6 @@ export const getStaticProps: GetStaticProps<
       // TODO: Add comments
       // TODO: Add related posts
     },
-    revalidate: REVALIDATION_TIME,
+    revalidate: REVAL_TIME,
   };
 };
