@@ -1,6 +1,8 @@
 import { IconPoint } from "@tabler/icons-react";
 import { Post } from "@typeDefs/entities";
 import { PostWOContent } from "@typeDefs/page";
+import dayjs from "dayjs";
+import { dateFormat } from "../utils/date.utils";
 
 interface StoryMetaProps {
   post: Post | PostWOContent;
@@ -12,7 +14,7 @@ export default function PostMeta(props: StoryMetaProps) {
     <p className={`flex items-center text-xs ${props.className ?? ""}`}>
       {props.post.author}
       <IconPoint size={8} style={{ margin: "0px 4px" }} />
-      {props.post.published}
+      {dayjs(props.post.published).format(dateFormat)}
       {/* <IconPoint size={8} style={{ margin: "0px 4px" }} /> */}
       {/* {props.} Chapters
       {props. && (props. ?? 0) > 1 && (

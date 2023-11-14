@@ -14,7 +14,7 @@ export default function ChaptersList({
       <li className="flex flex-col md:flex-row gap-2 items-start md:items-center p-3">
         <Link
           href={`/stories/${slug}/${chapters.at(0)?.id}`}
-          className="btn btn-sm w-full justify-between md:w-fit text-white bg-violet-500 hover:bg-violet-600"
+          className="btn btn-sm w-full justify-between md:w-fit bg-violet-300 text-gray-800 hover:bg-violet-400 focus:bg-violet-400"
         >
           Start Reading Chapter 1 <IconArrowRight size={20} />
         </Link>
@@ -27,7 +27,7 @@ export default function ChaptersList({
             className="block p-3 transition-colors hover:bg-gray-600/50 group"
           >
             <h3 className="text-xl text-white group-hover:text-violet-400 transition-colors">
-              {chapter.title}
+              {chapter.order}. {chapter.title}
             </h3>
             <p className="text-sm ">{chapter.excerpt}</p>
           </Link>

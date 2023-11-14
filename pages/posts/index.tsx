@@ -1,17 +1,35 @@
 import SubmitOrDonateAside from "@components/aside-cta/AsideCTA";
 import Post from "@components/posts/Post";
-import { REVAL_TIME, SITE_TITLE } from "@constants/app";
+import { REVAL_TIME, SITE_TITLE, SITE_URL } from "@constants/app";
 import { getPosts } from "@firebase/server.functions";
 import { PostDoc } from "@typeDefs/entities";
 import { PostsListProps } from "@typeDefs/page";
 import { dateFormat, fbTimestampToDateFormat } from "@utils/date.utils";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { NextSeo } from "next-seo";
 
 export default function PostsList({
   posts,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
+      <NextSeo
+        title={`Single Posts & Short Fiction | ${SITE_TITLE}`}
+        description="Single posts and short stories for a quick read."
+        openGraph={{
+          type: "website",
+          url: SITE_URL + "/posts",
+          siteName: SITE_TITLE,
+          images: [
+            {
+              url: posts[0].cover,
+              alt: posts[0].slug + "-cover",
+              width: 1280,
+              height: 720,
+            },
+          ],
+        }}
+      />
       <div className="max-w-screen-2xl mx-auto pt-4 px-4 md:px-6">
         <h1 className="text-3xl text-violet-300">
           Singles & Short Fiction on {SITE_TITLE}...

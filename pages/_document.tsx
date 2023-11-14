@@ -1,19 +1,19 @@
 import { Head, Html, Main, NextScript } from "next/document";
+import { DefaultSeo } from "next-seo";
+import { SITE_DESCRIPTION_ROOT, SITE_TITLE, SITE_URL } from "../constants/app";
 
 export default function Document() {
   return (
     <Html lang="en">
       <Head>
         <link
-          rel="shortcut icon"
-          href="/tpd-logo-w.svg"
-          type="image/svg+xml"
+          rel="icon"
+          href="/favicon-w/favicon.ico"
           media="(prefers-color-scheme: dark)"
         />
         <link
-          rel="shortcut icon"
-          href="/tpd-logo-b.svg"
-          type="image/svg+xml"
+          rel="icon"
+          href="/favicon-b/favicon.ico"
           media="(prefers-color-scheme: light)"
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

@@ -1,12 +1,35 @@
 import Navbar from "@components/Navbar";
 import ScrollReset from "@components/ScrollReset";
 import "@styles/globals.css";
+import { DefaultSeo } from "next-seo";
 import type { AppProps } from "next/app";
+import Analytics from "../components/Analytics";
+import { SITE_DESCRIPTION_ROOT, SITE_TITLE, SITE_URL } from "../constants/app";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
+      <DefaultSeo
+        title={SITE_TITLE}
+        description={SITE_DESCRIPTION_ROOT}
+        openGraph={{
+          type: "website",
+          locale: "en_IN",
+          url: SITE_URL,
+          siteName: SITE_TITLE,
+          description: SITE_DESCRIPTION_ROOT,
+          title: SITE_TITLE,
+        }}
+        additionalMetaTags={[
+          {
+            name: "viewport",
+            content:
+              "minimum-scale=1, maximum-scale=1, initial-scale=1, width=device-width",
+          },
+        ]}
+      />
       <ScrollReset />
+      <Analytics />
       <Navbar />
       <main className="grow overflow-y-auto scroll-smooth" id="main">
         <Component {...pageProps} />

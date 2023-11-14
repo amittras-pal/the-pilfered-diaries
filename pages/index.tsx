@@ -10,10 +10,10 @@ import {
 } from "@firebase/server.functions";
 import { PostDoc, SiteImageCfg, StoryDoc } from "@typeDefs/entities";
 import { HomeProps } from "@typeDefs/page";
-import { dateFormat, fbTimestampToDateFormat } from "@utils/date.utils";
+import { isoDateOfTimestamp } from "@utils/date.utils";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import SubscriptionForm from "../components/aside-cta/SubscriptionForm";
 import Divider from "../components/Divider";
+import SubscriptionForm from "../components/aside-cta/SubscriptionForm";
 
 export default function Home({
   stories,
@@ -50,8 +50,8 @@ export const getStaticProps: GetStaticProps<HomeProps> = async (_ctx) => {
     const obj = {
       ...story,
       slug: doc.id,
-      published: fbTimestampToDateFormat(story.published, dateFormat),
-      lastUpdated: fbTimestampToDateFormat(story.lastUpdated, dateFormat),
+      published: isoDateOfTimestamp(story.published),
+      lastUpdated: isoDateOfTimestamp(story.lastUpdated),
       chapterCount: story.chapters?.length,
     };
 
@@ -65,7 +65,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async (_ctx) => {
     const obj = {
       ...post,
       slug: doc.id,
-      published: fbTimestampToDateFormat(post.published, dateFormat),
+      published: isoDateOfTimestamp(post.published),
     };
 
     delete obj.content;

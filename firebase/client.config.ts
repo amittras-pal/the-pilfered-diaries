@@ -3,7 +3,7 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
-const app = initializeApp({
+export const app = initializeApp({
   apiKey: process.env.NEXT_PUBLIC_FB_API_KEY,
   appId: process.env.NEXT_PUBLIC_APP_ID,
   authDomain: process.env.NEXT_PUBLIC_FB_AUTH_DOMAIN,

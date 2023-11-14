@@ -46,7 +46,7 @@ export interface SingleStoryProps {
 
 export interface SingleChapterProps {
   chapter: ChapterWOContent;
-  story: Pick<Story, "title" | "cover" | "slug">;
+  story: Pick<Story, "title" | "cover" | "slug" | "tags">;
   content: MarkdownContent;
   readTime: ReadTimeResults;
   comments: Comment[];

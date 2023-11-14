@@ -15,7 +15,7 @@ function AuthorNoteSeparator() {
   return (
     <>
       <SectionBreak />
-      <h3 className="text-primary">Author&apos;s Note</h3>
+      <h3 className="text-purple-400">Author&apos;s Note</h3>
     </>
   );
 }

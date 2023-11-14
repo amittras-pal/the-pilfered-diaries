@@ -2,7 +2,7 @@ import Divider from "@components/Divider";
 import CommentsList from "@components/comments/CommentsList";
 import Markdown from "@components/markdown/Markdown";
 import SinglePostHeader from "@components/posts/PostHeader";
-import { AVG_WPM, REVAL_TIME } from "@constants/app";
+import { AVG_WPM, REVAL_TIME, SITE_URL } from "@constants/app";
 import {
   getAllPublishedPosts,
   getComments,
@@ -19,9 +19,11 @@ import axios from "axios";
 import grayMatter from "gray-matter";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
+import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import readingTime from "reading-time";
 import SubmitOrDonateAside from "../../components/aside-cta/AsideCTA";
+import { generatePostTitle } from "../../utils/app.utils";
 
 export default function SinglePost(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -33,6 +35,29 @@ export default function SinglePost(
 
   return (
     <>
+      <NextSeo
+        title={generatePostTitle(props.metadata)}
+        description={props.metadata.excerpt}
+        openGraph={{
+          type: "article",
+          description: props.metadata.excerpt,
+          title: props.metadata.title,
+          url: SITE_URL + "/posts/" + props.metadata.id,
+          article: {
+            publishedTime: props.metadata.published,
+            tags: props.metadata.tags,
+            authors: [props.metadata.author],
+          },
+          images: [
+            {
+              url: props.metadata.cover,
+              width: 1280,
+              height: 720,
+              alt: props.metadata.id + "-cover",
+            },
+          ],
+        }}
+      />
       <SinglePostHeader metadata={props.metadata} />
       <div
         id="content"

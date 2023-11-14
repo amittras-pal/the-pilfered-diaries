@@ -1,6 +1,8 @@
 import { IconLine, IconPoint } from "@tabler/icons-react";
+import dayjs from "dayjs";
 import { SingleChapterProps } from "../../types/page";
 import { getReadingTime } from "../../utils/app.utils";
+import { dateFormat } from "../../utils/date.utils";
 
 export default function ChapterHeader({
   chapter,
@@ -26,7 +28,7 @@ export default function ChapterHeader({
             <IconPoint size={16} />
             <span>{getReadingTime(readTime)}</span>
             <IconPoint size={16} />
-            <span>{chapter.published}</span>
+            <span>{dayjs(chapter.published).format(dateFormat)}</span>
           </p>
 
           <p className="mt-3 font-thin text-sm text-gray-300">

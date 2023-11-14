@@ -3,7 +3,7 @@ import CommentsList from "@components/comments/CommentsList";
 import Markdown from "@components/markdown/Markdown";
 import ChaptersList from "@components/stories/ChaptersList";
 import StoryHeader from "@components/stories/StoryHeader";
-import { REVAL_TIME } from "@constants/app";
+import { REVAL_TIME, SITE_URL } from "@constants/app";
 import {
   getAllPublishedStories,
   getComments,
@@ -11,22 +11,44 @@ import {
 } from "@firebase/server.functions";
 import { CommentDoc, StoryDoc } from "@typeDefs/entities";
 import { SingleStoryProps } from "@typeDefs/page";
-import {
-  dateFormat,
-  dateTimeFormat,
-  fbTimestampToDateFormat,
-} from "@utils/date.utils";
+import { isoDateOfTimestamp } from "@utils/date.utils";
 import axios from "axios";
 import grayMatter from "gray-matter";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
+import { NextSeo } from "next-seo";
 import SubmitOrDonateAside from "../../../components/aside-cta/AsideCTA";
+import { generateStoryTitle } from "../../../utils/app.utils";
 
 export default function SingleStory(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   return (
     <>
+      <NextSeo
+        title={generateStoryTitle(props.metadata)}
+        description={props.metadata.excerpt}
+        openGraph={{
+          type: "article",
+          description: props.metadata.excerpt,
+          title: props.metadata.title,
+          url: SITE_URL + "/posts/" + props.metadata.id,
+          article: {
+            publishedTime: props.metadata.published,
+            modifiedTime: props.metadata.lastUpdated,
+            tags: props.metadata.tags,
+            authors: [props.metadata.author],
+          },
+          images: [
+            {
+              url: props.metadata.cover,
+              width: 1280,
+              height: 720,
+              alt: props.metadata.slug + "-cover",
+            },
+          ],
+        }}
+      />
       <StoryHeader metadata={props.metadata} />
       <div
         id="content"
@@ -75,8 +97,8 @@ export const getStaticProps: GetStaticProps<
   const metadata = {
     ...story,
     slug: storyRes.id,
-    published: fbTimestampToDateFormat(story.published, dateFormat),
-    lastUpdated: fbTimestampToDateFormat(story.lastUpdated, dateFormat),
+    published: isoDateOfTimestamp(story.published),
+    lastUpdated: isoDateOfTimestamp(story.lastUpdated),
     chapterCount: story.chapters?.length,
   };
 
@@ -84,7 +106,7 @@ export const getStaticProps: GetStaticProps<
     story.chapters?.map((ch) => {
       const obj = {
         ...ch,
-        published: fbTimestampToDateFormat(ch.published, dateFormat),
+        published: isoDateOfTimestamp(ch.published),
       };
       delete obj.content;
       return obj;
@@ -97,7 +119,7 @@ export const getStaticProps: GetStaticProps<
     const cmnt = cm.data() as CommentDoc;
     return {
       ...cmnt,
-      date: fbTimestampToDateFormat(cmnt.date, dateTimeFormat),
+      date: isoDateOfTimestamp(cmnt.date),
       id: cm.id,
     };
   });

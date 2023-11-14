@@ -11,25 +11,45 @@ import {
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { CommentDoc, StoryDoc } from "@typeDefs/entities";
 import { SingleChapterProps } from "@typeDefs/page";
-import {
-  dateFormat,
-  dateTimeFormat,
-  fbTimestampToDateFormat,
-} from "@utils/date.utils";
+import { isoDateOfTimestamp } from "@utils/date.utils";
 import axios from "axios";
 import grayMatter from "gray-matter";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
+import { NextSeo } from "next-seo";
 import Link from "next/link";
 import { ParsedUrlQuery } from "querystring";
 import readingTime from "reading-time";
 import SubmitOrDonateAside from "../../../components/aside-cta/AsideCTA";
+import { generateChapterTitle } from "../../../utils/app.utils";
 
 export default function SingleChapter(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   return (
     <>
+      <NextSeo
+        title={generateChapterTitle(props.chapter, props.story)}
+        description={props.chapter.excerpt}
+        openGraph={{
+          type: "article",
+          description: props.chapter.excerpt,
+          title: props.chapter.title,
+          article: {
+            publishedTime: props.chapter.published,
+            tags: props.story.tags,
+            authors: [props.chapter.author],
+          },
+          images: [
+            {
+              url: props.story.cover,
+              width: 1280,
+              height: 720,
+              alt: props.story.slug + "-cover",
+            },
+          ],
+        }}
+      />
       <ChapterHeader
         chapter={props.chapter}
         story={props.story}
@@ -125,7 +145,7 @@ export const getStaticProps: GetStaticProps<
     const cmnt = cm.data() as CommentDoc;
     return {
       ...cmnt,
-      date: fbTimestampToDateFormat(cmnt.date, dateTimeFormat),
+      date: isoDateOfTimestamp(cmnt.date),
       id: cm.id,
     };
   });
@@ -133,11 +153,16 @@ export const getStaticProps: GetStaticProps<
   const props = {
     chapter: {
       ...chapter,
-      published: fbTimestampToDateFormat(chapter.published, dateFormat),
+      published: isoDateOfTimestamp(chapter.published),
     },
     content: await serialize(content),
     readTime: readTime,
-    story: { title: story.title, cover: story.cover, slug: storyRes.id },
+    story: {
+      title: story.title,
+      cover: story.cover,
+      slug: storyRes.id,
+      tags: story.tags,
+    },
     comments,
   };
 
