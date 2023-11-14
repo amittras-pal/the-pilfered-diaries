@@ -37,6 +37,7 @@ export default function SingleStory(
           comments={props.comments}
           itemTitle={props.metadata.title}
           itemId={props.metadata.slug}
+          itemType="stories"
         />
       </div>
     </>

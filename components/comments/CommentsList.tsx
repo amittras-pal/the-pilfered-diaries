@@ -5,6 +5,7 @@ import React from "react";
 
 interface CommentsListProps {
   comments: Comment[];
+  itemType: "posts" | "stories";
   itemTitle: string;
   itemId: string;
 }
@@ -22,7 +23,13 @@ export default function CommentsList(props: CommentsListProps) {
 
   return (
     <>
-      {showForm && <CommentForm onClose={toggleForm} />}
+      {showForm && (
+        <CommentForm
+          onClose={toggleForm}
+          type={props.itemType}
+          target={props.itemId}
+        />
+      )}
       <div className="flex justify-between items-start">
         <p className="text-xl text-violet-300 ">
           Comments on {props.itemTitle}
@@ -47,6 +54,7 @@ export default function CommentsList(props: CommentsListProps) {
               <p className="text-violet-400 text-sm">{comment.date}</p>
             </div>
             <p className="text-lg text-gray-200 ">{comment.title}</p>
+            {/* TODO: Comment body should preserve formatting. */}
             {comment.body && <p className="text-sm">{comment.body}</p>}
           </div>
         ))}

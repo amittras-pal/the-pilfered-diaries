@@ -17,7 +17,7 @@ function Input(
   ref: ForwardedRef<HTMLInputElement>
 ) {
   return (
-    <div className={`form-control w-full ${className}`}>
+    <div className={`form-control w-full font-body ${className}`}>
       <label className="label">
         <span className="label-text">{label}</span>
         {rest.required && (

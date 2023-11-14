@@ -39,6 +39,7 @@ export default function SingleChapter(
           comments={props.comments}
           itemTitle={props.story.title}
           itemId={props.story.slug}
+          itemType="stories"
         />
       </div>
     </>

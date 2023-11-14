@@ -40,6 +40,7 @@ export default function SinglePost(
           comments={props.comments}
           itemTitle={props.metadata.title}
           itemId={props.metadata.id}
+          itemType="posts"
         />
       </div>
     </>
