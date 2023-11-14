@@ -10,11 +10,7 @@ import {
 } from "@firebase/server.functions";
 import { CommentDoc, PostDoc } from "@typeDefs/entities";
 import { SinglePostProps } from "@typeDefs/page";
-import {
-  dateFormat,
-  dateTimeFormat,
-  fbTimestampToDateFormat,
-} from "@utils/date.utils";
+import { isoDateOfTimestamp } from "@utils/date.utils";
 import axios from "axios";
 import grayMatter from "gray-matter";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
@@ -105,7 +101,7 @@ export const getStaticProps: GetStaticProps<
   const metadata = {
     ...post,
     id: postRes.id,
-    published: fbTimestampToDateFormat(post.published, dateFormat),
+    published: isoDateOfTimestamp(post.published),
     readingTime: readingTime(content, { wordsPerMinute: AVG_WPM }),
   };
 
@@ -115,7 +111,7 @@ export const getStaticProps: GetStaticProps<
     const cmnt = cm.data() as CommentDoc;
     return {
       ...cmnt,
-      date: fbTimestampToDateFormat(cmnt.date, dateTimeFormat),
+      date: isoDateOfTimestamp(cmnt.date),
       id: cm.id,
     };
   });

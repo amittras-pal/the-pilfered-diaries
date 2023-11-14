@@ -4,7 +4,7 @@ import { REVAL_TIME, SITE_TITLE, SITE_URL } from "@constants/app";
 import { getPosts } from "@firebase/server.functions";
 import { PostDoc } from "@typeDefs/entities";
 import { PostsListProps } from "@typeDefs/page";
-import { dateFormat, fbTimestampToDateFormat } from "@utils/date.utils";
+import { isoDateOfTimestamp } from "@utils/date.utils";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { NextSeo } from "next-seo";
 
@@ -54,7 +54,7 @@ export const getStaticProps: GetStaticProps<PostsListProps> = async (_ctx) => {
     const obj = {
       ...post,
       slug: doc.id,
-      published: fbTimestampToDateFormat(post.published, dateFormat),
+      published: isoDateOfTimestamp(post.published),
     };
     delete obj.content;
     return obj;
