@@ -11,19 +11,20 @@ interface Props extends InputProps {
   help?: string;
 }
 
-// Error States
 function Input(
   { label, error, help, className, ...rest }: Props,
   ref: ForwardedRef<HTMLInputElement>
 ) {
   return (
     <div className={`form-control w-full font-body ${className}`}>
-      <label className="label">
-        <span className="label-text">{label}</span>
-        {rest.required && (
-          <span className="label-text text-red-400 mr-auto ml-1">*</span>
-        )}
-      </label>
+      {(label || rest.required) && (
+        <label className="label">
+          <span className="label-text">{label}</span>
+          {rest.required && (
+            <span className="label-text text-red-400 mr-auto ml-1">*</span>
+          )}
+        </label>
+      )}
       <input
         {...rest}
         ref={ref}
@@ -32,6 +33,11 @@ function Input(
           error ? "input-error" : ""
         }`}
       />
+      {help && !error && (
+        <label className="label">
+          <span className="label-text-alt text-gray-400">{help}</span>
+        </label>
+      )}
       {error && (
         <label className="label">
           <span className="label-text-alt text-red-400">{error}</span>

@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function SubmitContent() {
   return (
-    <div className="my-3 py-3 border-t border-b md:border-b-0 border-gray-700">
+    <div className="py-3">
       <h2 className="text-2xl text-violet-300 mb-3">
         Want to see your content here?
       </h2>

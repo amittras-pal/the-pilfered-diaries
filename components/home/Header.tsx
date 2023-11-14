@@ -12,7 +12,8 @@ export default function Header({ cfg }: { cfg: SiteImageCfg }) {
         <div className="max-w-xl">
           <h1 className="text-5xl md:text-7xl text-white">{SITE_TITLE}</h1>
           <p className="py-6 font-light text-lg md:text-xl text-violet-300">
-            When a Thinker finds his lost words!
+            When a thinker finds his lost words, <br />
+            stories happen!
           </p>
           <a
             target="_blank"

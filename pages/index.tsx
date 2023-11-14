@@ -12,6 +12,8 @@ import { PostDoc, SiteImageCfg, StoryDoc } from "@typeDefs/entities";
 import { HomeProps } from "@typeDefs/page";
 import { dateFormat, fbTimestampToDateFormat } from "@utils/date.utils";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
+import SubscriptionForm from "../components/aside-cta/SubscriptionForm";
+import Divider from "../components/Divider";
 
 export default function Home({
   stories,
@@ -24,7 +26,9 @@ export default function Home({
       <div className="flex flex-col md:flex-row gap-2 md:gap-3 max-w-screen-2xl mx-auto py-4 px-2 md:px-3">
         <section className="basis-3/5 flex flex-col">
           <Stories data={stories} />
+          <Divider direction="horizontal" className="mt-3" />
           <SubmitContent />
+          <SubscriptionForm />
         </section>
         <section className="basis-2/5">
           <Posts data={posts} />

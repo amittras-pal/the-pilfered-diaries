@@ -8,6 +8,7 @@ import {
   getComments,
   getSingleStory,
 } from "@firebase/server.functions";
+import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { CommentDoc, StoryDoc } from "@typeDefs/entities";
 import { SingleChapterProps } from "@typeDefs/page";
 import {
@@ -19,8 +20,10 @@ import axios from "axios";
 import grayMatter from "gray-matter";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
+import Link from "next/link";
 import { ParsedUrlQuery } from "querystring";
 import readingTime from "reading-time";
+import SubmitOrDonateAside from "../../../components/aside-cta/AsideCTA";
 
 export default function SingleChapter(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -32,15 +35,43 @@ export default function SingleChapter(
         story={props.story}
         readTime={props.readTime}
       />
-      <div id="content" className="my-6 max-w-screen-xl mx-auto px-3 md:px-4">
-        <Markdown {...props.content} />
-        <Divider direction="horizontal" className="my-3" />
-        <CommentsList
-          comments={props.comments}
-          itemTitle={props.story.title}
-          itemId={props.story.slug}
-          itemType="stories"
-        />
+      <div
+        id="content"
+        className="my-6 max-w-screen-xl mx-auto px-3 md:px-4 flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-violet-300"
+      >
+        <div className="basis-9/12 px-0 md:px-2">
+          <Markdown {...props.content} />
+          <div className="mb-4 flex gap-2 justify-between md:justify-end">
+            {props.chapter.previousChapter && (
+              <Link
+                href={`/stories/${props.story.slug}/${props.chapter.previousChapter}`}
+                className="btn btn-ghost btn-sm gap-2"
+              >
+                <IconArrowLeft size={18} /> Previous
+              </Link>
+            )}
+            {props.chapter.nextChapter ? (
+              <Link
+                href={`/stories/${props.story.slug}/${props.chapter.nextChapter}`}
+                className="btn btn-ghost btn-sm gap-2"
+              >
+                Next <IconArrowRight size={18} />
+              </Link>
+            ) : (
+              <Link href={"/stories"} className="btn btn-ghost btn-sm gap-2">
+                Explore More Stories <IconArrowRight size={18} />
+              </Link>
+            )}
+          </div>
+          <Divider direction="horizontal" className="my-3" />
+          <CommentsList
+            comments={props.comments}
+            itemTitle={props.story.title}
+            itemId={props.story.slug}
+            itemType="stories"
+          />
+        </div>
+        <SubmitOrDonateAside />
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import SubmitOrDonateAside from "@components/SubmitOrDonateAside";
+import SubmitOrDonateAside from "@components/aside-cta/AsideCTA";
 import Story from "@components/stories/Story";
 import { REVAL_TIME, SITE_TITLE } from "@constants/app";
 import { getStories } from "@firebase/server.functions";

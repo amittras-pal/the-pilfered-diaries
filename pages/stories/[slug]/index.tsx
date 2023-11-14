@@ -20,6 +20,7 @@ import axios from "axios";
 import grayMatter from "gray-matter";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
+import SubmitOrDonateAside from "../../../components/aside-cta/AsideCTA";
 
 export default function SingleStory(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -27,18 +28,24 @@ export default function SingleStory(
   return (
     <>
       <StoryHeader metadata={props.metadata} />
-      <div id="content" className="my-6 max-w-screen-xl mx-auto px-3 md:px-4">
-        <h2 className="text-2xl text-violet-300 ">Preface</h2>
-        <Markdown {...props.preface} />
-        <Divider direction="horizontal" className="my-3" />
-        <ChaptersList chapters={props.chapters} slug={props.metadata.slug} />
-        <Divider direction="horizontal" className="my-3" />
-        <CommentsList
-          comments={props.comments}
-          itemTitle={props.metadata.title}
-          itemId={props.metadata.slug}
-          itemType="stories"
-        />
+      <div
+        id="content"
+        className="my-6 max-w-screen-xl mx-auto px-3 md:px-4 flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-violet-300"
+      >
+        <div className="basis-9/12 px-0 md:px-2">
+          <h2 className="text-2xl text-violet-300 ">Preface</h2>
+          <Markdown {...props.preface} />
+          <Divider direction="horizontal" className="my-3" />
+          <ChaptersList chapters={props.chapters} slug={props.metadata.slug} />
+          <Divider direction="horizontal" className="my-3" />
+          <CommentsList
+            comments={props.comments}
+            itemTitle={props.metadata.title}
+            itemId={props.metadata.slug}
+            itemType="stories"
+          />
+        </div>
+        <SubmitOrDonateAside />
       </div>
     </>
   );

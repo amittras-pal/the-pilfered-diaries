@@ -1,5 +1,6 @@
 import { MarkdownContent } from "@typeDefs/page";
 import { MDXRemote } from "next-mdx-remote";
+import styles from "./Markdown.module.css";
 import { components } from "./plugins";
 
 export default function Markdown(props: MarkdownContent) {
@@ -10,7 +11,7 @@ export default function Markdown(props: MarkdownContent) {
    *        - ... other features from existing app.
    */
   return (
-    <div className="markdown" style={{ fontSize: `${16}px` }}>
+    <div className={styles.markdown} style={{ fontSize: `${16}px` }}>
       <MDXRemote {...props} components={components} />
     </div>
   );

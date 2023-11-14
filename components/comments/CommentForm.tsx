@@ -2,8 +2,10 @@
 
 import Input from "@components/form/Input";
 import TextArea from "@components/form/TextArea";
+import { auth } from "@firebase/client.config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IconMessage2Check, IconMessage2X } from "@tabler/icons-react";
+import { User, onAuthStateChanged } from "firebase/auth";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -27,6 +29,7 @@ interface CommentFormProps {
 }
 
 export default function CommentForm(props: CommentFormProps) {
+  const [user, setUser] = useState<User | null>(null);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [commentSaved, setCommentSaved] = useState<boolean>(false);
 
@@ -38,7 +41,8 @@ export default function CommentForm(props: CommentFormProps) {
     handleSubmit,
     reset,
     register,
-    setValue, // TODO: Preload username and email from auth.
+    setValue,
+    setFocus,
     formState: { errors },
   } = useForm<CommentForm>({
     mode: "onBlur",
@@ -51,6 +55,18 @@ export default function CommentForm(props: CommentFormProps) {
     },
     resolver: yupResolver(commentSchema),
   });
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setValue("userName", user.displayName ?? "");
+        setValue("email", user.email ?? "");
+        setUser(user);
+        setFocus("title");
+      }
+    });
+    return unsubscribe;
+  }, [setFocus, setValue]);
 
   const onSubmit: SubmitHandler<CommentForm> = async (values) => {
     const commentDoc: CommentDoc = {
@@ -68,7 +84,6 @@ export default function CommentForm(props: CommentFormProps) {
       setSubmitting(true);
       const ref = collection(firestore, "comments");
       const res = await addDoc(ref, commentDoc);
-      console.log(res);
       if (res.id) setCommentSaved(true);
     } catch (error) {
       console.log(error);
@@ -82,6 +97,7 @@ export default function CommentForm(props: CommentFormProps) {
     props.onClose();
   };
 
+  // TODO: sign out and comment as a different user.
   return (
     <>
       <form
@@ -96,12 +112,16 @@ export default function CommentForm(props: CommentFormProps) {
             label="Your Name"
             autoFocus
             required
+            readOnly={Boolean(user)}
+            help={user ? "You are logged in as this user." : ""}
             error={errors.userName?.message ?? ""}
             disabled={submitting || commentSaved}
             {...register("userName")}
           />
           <Input
             label="Email"
+            readOnly={Boolean(user)}
+            help={user ? "You are logged in as this user." : ""}
             error={errors.email?.message ?? ""}
             disabled={submitting || commentSaved}
             {...register("email")}
@@ -118,6 +138,7 @@ export default function CommentForm(props: CommentFormProps) {
             rows={5}
             label="Comment Body"
             className="col-span-1 md:col-span-2"
+            help="Your Comment will be made public within 24 hours."
             disabled={submitting || commentSaved}
           />
         </div>
