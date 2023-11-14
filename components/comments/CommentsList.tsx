@@ -1,10 +1,10 @@
+import { dateTimeFormat } from "@constants/app";
 import {
   IconCircle,
   IconMessage2Plus,
   IconMessageCircleExclamation,
 } from "@tabler/icons-react";
 import { Comment } from "@typeDefs/entities";
-import { dateTimeFormat } from "@utils/date.utils";
 import dayjs from "dayjs";
 import dynamic from "next/dynamic";
 import React from "react";
@@ -65,7 +65,6 @@ export default function CommentsList(props: CommentsListProps) {
               </p>
             </div>
             <p className="text-lg text-gray-200 ">{comment.title}</p>
-            {/* TODO: Comment body should preserve formatting. */}
             {comment.body && (
               <p className="text-sm whitespace-pre-wrap">{comment.body}</p>
             )}

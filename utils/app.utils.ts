@@ -5,6 +5,7 @@ import {
   SinglePostMetadata,
   StoryWOChaptersNContent,
 } from "@typeDefs/page";
+import { Timestamp } from "firebase-admin/firestore";
 import { ReadTimeResults } from "reading-time";
 
 export function baseUrl(path: string): string {
@@ -36,4 +37,8 @@ export function generateChapterTitle(
   story: Pick<Story, "title" | "cover" | "slug" | "tags">
 ) {
   return `${chapter.title} [${story.title}: Chapter ${chapter.order}] | ${SITE_TITLE}`;
+}
+
+export function isoDateOfTimestamp(timestamp: Timestamp) {
+  return timestamp.toDate().toISOString();
 }

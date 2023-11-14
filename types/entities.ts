@@ -82,7 +82,7 @@ export interface SiteImageCfg {
   profileHome: string;
   siteHeader: {
     credit: string;
-    position: string; // TODO: this isn't used anywhere.
+    position: string; // TODO: this isn't used anywhere yet.
     url: string;
   };
 }

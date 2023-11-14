@@ -29,7 +29,7 @@ export default function Navbar() {
                 Posts
               </Link>
             </li>
-            {/* TODO: Add Pages. */}
+            {/* TODO: Add Submissions & About */}
             {/* <li>
               <Link href="/submissions">Submit Your Work</Link>
             </li> */}

@@ -12,7 +12,7 @@ import {
 } from "@firebase/server.functions";
 import { PostDoc, SiteImageCfg, StoryDoc } from "@typeDefs/entities";
 import { HomeProps } from "@typeDefs/page";
-import { isoDateOfTimestamp } from "@utils/date.utils";
+import { isoDateOfTimestamp } from "@utils/app.utils";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 
 export default function Home({

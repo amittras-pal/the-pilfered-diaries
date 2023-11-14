@@ -4,7 +4,7 @@ import { REVAL_TIME, SITE_TITLE, SITE_URL } from "@constants/app";
 import { getPosts } from "@firebase/server.functions";
 import { PostDoc } from "@typeDefs/entities";
 import { PostsListProps } from "@typeDefs/page";
-import { isoDateOfTimestamp } from "@utils/date.utils";
+import { isoDateOfTimestamp } from "@utils/app.utils";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { NextSeo } from "next-seo";
 

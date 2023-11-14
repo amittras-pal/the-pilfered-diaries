@@ -13,8 +13,7 @@ import {
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { CommentDoc, StoryDoc } from "@typeDefs/entities";
 import { SingleChapterProps } from "@typeDefs/page";
-import { generateChapterTitle } from "@utils/app.utils";
-import { isoDateOfTimestamp } from "@utils/date.utils";
+import { generateChapterTitle, isoDateOfTimestamp } from "@utils/app.utils";
 import axios from "axios";
 import grayMatter from "gray-matter";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";

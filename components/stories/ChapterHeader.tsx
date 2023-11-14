@@ -1,7 +1,7 @@
+import { dateFormat } from "@constants/app";
 import { IconLine, IconPoint } from "@tabler/icons-react";
 import { SingleChapterProps } from "@typeDefs/page";
 import { getReadingTime } from "@utils/app.utils";
-import { dateFormat } from "@utils/date.utils";
 import dayjs from "dayjs";
 
 export default function ChapterHeader({

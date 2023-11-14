@@ -7,8 +7,6 @@ export default function Markdown(props: MarkdownContent) {
   /**
    * // TODO:  Validate behaviours with the existing one.
    *        - text size control
-   *        - fragment linking
-   *        - ... other features from existing app.
    */
   return (
     <div className={styles.markdown} style={{ fontSize: `${16}px` }}>

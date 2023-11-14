@@ -13,8 +13,7 @@ import {
 } from "@firebase/server.functions";
 import { CommentDoc, StoryDoc } from "@typeDefs/entities";
 import { SingleStoryProps } from "@typeDefs/page";
-import { generateStoryTitle } from "@utils/app.utils";
-import { isoDateOfTimestamp } from "@utils/date.utils";
+import { generateStoryTitle, isoDateOfTimestamp } from "@utils/app.utils";
 import axios from "axios";
 import grayMatter from "gray-matter";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";

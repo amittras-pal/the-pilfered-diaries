@@ -12,8 +12,7 @@ import {
 } from "@firebase/server.functions";
 import { CommentDoc, PostDoc } from "@typeDefs/entities";
 import { SinglePostProps } from "@typeDefs/page";
-import { generatePostTitle } from "@utils/app.utils";
-import { isoDateOfTimestamp } from "@utils/date.utils";
+import { generatePostTitle, isoDateOfTimestamp } from "@utils/app.utils";
 import axios from "axios";
 import grayMatter from "gray-matter";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
@@ -26,7 +25,9 @@ export default function SinglePost(
   props: InferGetStaticPropsType<typeof getStaticProps>
 ) {
   const router = useRouter();
-  if (router.isFallback) return "Loading..."; // TODO: set up a loader.
+  // TODO: set up a loader.
+  // TODO: also set up loader for other ISR pages.
+  if (router.isFallback) return "Loading...";
 
   props.content;
 
@@ -125,6 +126,7 @@ export const getStaticProps: GetStaticProps<
       metadata,
       comments,
       // TODO: Add related posts
+      // TODO: also add related content for other content types.
     },
     revalidate: REVAL_TIME,
   };
