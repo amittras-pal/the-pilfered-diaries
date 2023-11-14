@@ -4,10 +4,10 @@ import {
   IconMessageCircleExclamation,
 } from "@tabler/icons-react";
 import { Comment } from "@typeDefs/entities";
+import { dateTimeFormat } from "@utils/date.utils";
 import dayjs from "dayjs";
 import dynamic from "next/dynamic";
 import React from "react";
-import { dateTimeFormat } from "@utils/date.utils";
 
 interface CommentsListProps {
   comments: Comment[];
@@ -60,7 +60,7 @@ export default function CommentsList(props: CommentsListProps) {
               <p className="text-white">
                 <IconCircle size={8} />
               </p>
-              <p className="text-violet-400 text-sm">
+              <p className="text-violet-400 text-sm" suppressHydrationWarning>
                 {dayjs(comment.date).format(dateTimeFormat)}
               </p>
             </div>

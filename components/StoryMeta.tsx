@@ -11,7 +11,10 @@ interface StoryMetaProps {
 
 export default function StoryMeta(props: StoryMetaProps) {
   return (
-    <p className={`flex items-center text-xs ${props.className ?? ""}`}>
+    <p
+      suppressHydrationWarning
+      className={`flex items-center text-xs ${props.className ?? ""}`}
+    >
       {props.story.author}
       <IconPoint size={8} style={{ margin: "0px 2px" }} />
       {dayjs(props.story.published).format(dateFormat)}

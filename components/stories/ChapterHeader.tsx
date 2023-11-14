@@ -28,7 +28,9 @@ export default function ChapterHeader({
             <IconPoint size={16} />
             <span>{getReadingTime(readTime)}</span>
             <IconPoint size={16} />
-            <span>{dayjs(chapter.published).format(dateFormat)}</span>
+            <span suppressHydrationWarning>
+              {dayjs(chapter.published).format(dateFormat)}
+            </span>
           </p>
 
           <p className="mt-3 font-thin text-sm text-gray-300">
