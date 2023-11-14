@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function SubmitContent() {
   return (
     <div className="my-3 py-3 border-t border-b md:border-b-0 border-gray-700">
-      <h2 className="text-2xl text-violet-300 font-serif mb-3">
+      <h2 className="text-2xl text-violet-300 mb-3">
         Want to see your content here?
       </h2>
       <div className="flex gap-2 flex-col items-center md:flex-row">

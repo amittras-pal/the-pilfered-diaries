@@ -7,6 +7,10 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily: {
+      display: ["'Belleza'", "sans-serif", "ui-sans-serif"],
+      body: ["'Crimson Pro'", "serif", "ui-serif"],
+    },
     extend: {
       grayscale: {
         25: "25%",

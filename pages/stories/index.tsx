@@ -13,7 +13,7 @@ export default function StoriesLIst({
   return (
     <>
       <div className="max-w-screen-2xl mx-auto pt-4 px-4 md:px-6">
-        <h1 className="text-3xl font-serif text-violet-300">
+        <h1 className="text-3xl text-violet-300">
           Stories & Narratives on {SITE_TITLE}...
         </h1>
       </div>

@@ -21,13 +21,13 @@ export default function Post(post: PostWOContent) {
       <div className="card-body basis-2/3 gap-1 md:gap-2">
         <Link
           href={`/posts/${post.slug}`}
-          className="card-title text-gray-200 hover:text-violet-400 focus:text-violet-400 outline-none transition-colors font-serif whitespace-nowrap"
+          className="font-display text-2xl text-gray-200 hover:text-violet-400 focus:text-violet-400 outline-none transition-colors whitespace-nowrap"
         >
           {post.title}
         </Link>
-        <p className="text-sm font-serif">{post.excerpt}</p>
+        <p className="text-sm ">{post.excerpt}</p>
         <div className="grow-0 mt-3 md:mt-0 flex flex-col gap-[4px]">
-          <PostMeta post={post} addTopMargin={false} />
+          <PostMeta post={post} />
           <TagsList tags={post.tags} className="flex gap-2" />
         </div>
       </div>

@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Navbar() {
   return (
     <div className="navbar bg-base-100">
-      <div className="navbar-start">
+      <div className="navbar-start w-auto gap-3">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost btn-circle btn-sm">
             <IconMenu2 size={20} />
@@ -15,13 +15,19 @@ export default function Navbar() {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52 border border-gray-700"
           >
             <li>
-              <Link href="/">Home</Link>
+              <Link href="/" className="hover:text-white">
+                Home
+              </Link>
             </li>
             <li>
-              <Link href="/stories">Stories & Narratives</Link>
+              <Link href="/stories" className="hover:text-white">
+                Stories & Narratives
+              </Link>
             </li>
             <li>
-              <Link href="/posts">Posts</Link>
+              <Link href="/posts" className="hover:text-white">
+                Posts
+              </Link>
             </li>
             {/* TODO: Add Pages. */}
             {/* <li>
@@ -29,10 +35,7 @@ export default function Navbar() {
             </li> */}
           </ul>
         </div>
-        <Link
-          href="/"
-          className="btn btn-ghost btn-sm normal-case font-serif text-xl"
-        >
+        <Link href="/" className="text-2xl font-display text-gray-200">
           {SITE_TITLE}
         </Link>
       </div>

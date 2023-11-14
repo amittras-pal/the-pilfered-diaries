@@ -14,17 +14,15 @@ export default function SinglePostHeader({
     >
       <div className="hero-content text-center bg-gray-700/20 backdrop-blur-sm rounded-md shadow-lg">
         <div className="max-w-screen-xl">
-          <h1 className="text-5xl font-serif text-white">{metadata.title}</h1>
-          <p className="my-3 flex gap-1 items-center justify-center text-white font-serif text-sm">
+          <h1 className="text-5xl text-white">{metadata.title}</h1>
+          <p className="my-3 flex gap-1 items-center justify-center text-white text-sm">
             <span>{metadata.author}</span>
             <IconPoint size={16} />
             <span>{getReadingTime(metadata.readingTime)}</span>
             <IconPoint size={16} />
             <span>{metadata.published}</span>
           </p>
-          <p className="text-sm font-serif text-violet-200">
-            {metadata.excerpt}
-          </p>
+          <p className="text-sm text-violet-200">{metadata.excerpt}</p>
         </div>
       </div>
     </header>

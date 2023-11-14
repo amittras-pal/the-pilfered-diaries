@@ -1,7 +1,6 @@
-import React from "react";
-import { ChapterWOContent } from "../../types/page";
-import Link from "next/link";
 import { IconArrowRight } from "@tabler/icons-react";
+import Link from "next/link";
+import { ChapterWOContent } from "../../types/page";
 
 export default function ChaptersList({
   chapters,
@@ -27,10 +26,10 @@ export default function ChaptersList({
             href={`/stories/${slug}/${chapter.id}`}
             className="block p-3 transition-colors hover:bg-gray-600/50 group"
           >
-            <h3 className="text-xl text-white font-serif group-hover:text-violet-400 transition-colors">
+            <h3 className="text-xl text-white group-hover:text-violet-400 transition-colors">
               {chapter.title}
             </h3>
-            <p className="text-sm font-serif">{chapter.excerpt}</p>
+            <p className="text-sm ">{chapter.excerpt}</p>
           </Link>
         </li>
       ))}

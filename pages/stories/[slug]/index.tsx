@@ -28,7 +28,7 @@ export default function SingleStory(
     <>
       <StoryHeader metadata={props.metadata} />
       <div id="content" className="my-6 max-w-screen-xl mx-auto px-3 md:px-4">
-        <h2 className="text-2xl text-violet-300 font-serif">Preface</h2>
+        <h2 className="text-2xl text-violet-300 ">Preface</h2>
         <Markdown {...props.preface} />
         <Divider direction="horizontal" className="my-3" />
         <ChaptersList chapters={props.chapters} slug={props.metadata.slug} />

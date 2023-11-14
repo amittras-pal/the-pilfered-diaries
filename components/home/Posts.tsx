@@ -12,7 +12,7 @@ export default function Posts({ data }: StoriesProps) {
   return (
     <>
       <div className="flex items-center justify-between mb-3">
-        <h2 className="text-2xl text-violet-300 font-serif">Single Posts</h2>
+        <h2 className="text-2xl text-violet-300 ">Single Posts</h2>
         <Link href="/posts" className="btn btn-sm btn-ghost">
           View All
         </Link>
@@ -36,14 +36,14 @@ export default function Posts({ data }: StoriesProps) {
           <div className="p-2 md:p-3 basis-2/3 flex flex-col">
             <Link
               href={`/posts/${post.slug}`}
-              className="text-xl text-white hover:text-violet-400 focus:text-violet-400 outline-none transition-colors font-serif whitespace-nowrap"
+              className="text-xl text-white hover:text-violet-400 focus:text-violet-400 outline-none transition-colors whitespace-nowrap font-display"
             >
               {post.title}
             </Link>
             <p className="text-xs line-clamp-1 md:line-clamp-2">
               {post.excerpt}
             </p>
-            <PostMeta post={post} addTopMargin={false} className="mt-auto" />
+            <PostMeta post={post} className="mt-auto" />
             <TagsList tags={post.tags} className="" showCount={2} />
           </div>
         </article>

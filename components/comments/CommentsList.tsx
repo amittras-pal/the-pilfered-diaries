@@ -24,7 +24,7 @@ export default function CommentsList(props: CommentsListProps) {
     <>
       {showForm && <CommentForm onClose={toggleForm} />}
       <div className="flex justify-between items-start">
-        <p className="text-xl text-violet-300 font-serif">
+        <p className="text-xl text-violet-300 ">
           Comments on {props.itemTitle}
         </p>
         {!showForm && (
@@ -46,7 +46,7 @@ export default function CommentsList(props: CommentsListProps) {
               </p>
               <p className="text-violet-400 text-sm">{comment.date}</p>
             </div>
-            <p className="text-lg text-gray-200 font-serif">{comment.title}</p>
+            <p className="text-lg text-gray-200 ">{comment.title}</p>
             {comment.body && <p className="text-sm">{comment.body}</p>}
           </div>
         ))}

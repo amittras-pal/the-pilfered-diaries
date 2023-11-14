@@ -10,7 +10,7 @@ export default function Markdown(props: MarkdownContent) {
    *        - ... other features from existing app.
    */
   return (
-    <div className="markdown" style={{ fontSize: `${14}px` }}>
+    <div className="markdown" style={{ fontSize: `${16}px` }}>
       <MDXRemote {...props} components={components} />
     </div>
   );

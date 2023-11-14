@@ -22,13 +22,13 @@ export default function Story(story: StoryWOChaptersNContent) {
       <div className="card-body basis-2/3 gap-1 md:gap-2">
         <Link
           href={`/stories/${story.slug}`}
-          className="card-title text-gray-200 hover:text-violet-400 focus:text-violet-400 outline-none transition-colors font-serif whitespace-nowrap"
+          className="card-title text-gray-200 hover:text-violet-400 focus:text-violet-400 outline-none transition-colors whitespace-nowrap"
         >
           {story.title}
         </Link>
-        <p className="text-sm font-serif">{story.excerpt}</p>
+        <p className="text-sm ">{story.excerpt}</p>
         <div className="grow-0 mt-3 md:mt-0 flex flex-col gap-[4px]">
-          <StoryMeta story={story} addTopMargin={false} />
+          <StoryMeta story={story} />
           <p className="text-xs">
             <span className="text-white font-bold">{story.chapterCount} </span>
             Chapters

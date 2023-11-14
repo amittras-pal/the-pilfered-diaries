@@ -13,12 +13,8 @@ export default function StoryHeader({
     >
       <div className="hero-content text-center bg-gray-700/20 backdrop-blur-sm rounded-md shadow-lg">
         <div className="max-w-xl flex flex-col items-center">
-          <h1 className="text-5xl font-serif text-white">{metadata.title}</h1>
-          <StoryMeta
-            story={metadata}
-            addTopMargin
-            className="text-white text-md font-serif"
-          />
+          <h1 className="text-5xl text-white">{metadata.title}</h1>
+          <StoryMeta story={metadata} className="text-white text-md" />
           <p className="pt-3 font-thin text-sm text-white">
             {metadata.excerpt}
           </p>

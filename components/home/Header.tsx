@@ -9,9 +9,9 @@ export default function Header({ cfg }: { cfg: SiteImageCfg }) {
       style={{ backgroundImage: `url(${cfg.siteHeader.url})` }}
     >
       <div className="hero-content text-center backdrop-blur-sm rounded-md shadow-sm">
-        <div className="max-w-md">
-          <h1 className="text-5xl font-serif text-white">{SITE_TITLE}</h1>
-          <p className="py-6 font-thin text-violet-300">
+        <div className="max-w-xl">
+          <h1 className="text-5xl md:text-7xl text-white">{SITE_TITLE}</h1>
+          <p className="py-6 font-light text-lg md:text-xl text-violet-300">
             When a Thinker finds his lost words!
           </p>
           <a
@@ -24,7 +24,7 @@ export default function Header({ cfg }: { cfg: SiteImageCfg }) {
           </a>
         </div>
       </div>
-      <div className="absolute bottom-2 right-2 px-2 py-1 rounded bg-gray-500/40 backdrop-blur-md text-xs text-gray-300">
+      <div className="font-body absolute bottom-2 right-2 px-2 py-1 rounded bg-gray-500/40 backdrop-blur-md text-xs text-gray-300">
         Image By: {cfg.siteHeader.credit}
       </div>
     </header>

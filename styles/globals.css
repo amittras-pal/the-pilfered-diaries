@@ -6,10 +6,31 @@
   @apply h-screen w-screen flex flex-col;
 }
 
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display;
+  }
+  p,
+  a {
+    @apply font-body;
+  }
+}
+
 /* TODO: move into css-module */
 @layer components {
   .markdown {
-    @apply font-serif text-gray-300;
+    @apply text-gray-300;
+  }
+  .badge {
+    @apply font-body;
+  }
+  .btn {
+    @apply font-display font-semibold;
   }
 }
 
@@ -26,11 +47,11 @@
 }
 
 .markdown h2 {
-  @apply text-3xl mb-4 font-sans;
+  @apply text-3xl mb-4;
 }
 
 .markdown h3 {
-  @apply text-2xl mb-3 font-sans;
+  @apply text-2xl mb-3;
 }
 
 .markdown blockquote {

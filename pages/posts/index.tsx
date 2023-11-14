@@ -13,8 +13,8 @@ export default function PostsList({
   return (
     <>
       <div className="max-w-screen-2xl mx-auto pt-4 px-4 md:px-6">
-        <h1 className="text-3xl font-serif text-violet-300">
-          Stories & Narratives on {SITE_TITLE}...
+        <h1 className="text-3xl text-violet-300">
+          Singles & Short Fiction on {SITE_TITLE}...
         </h1>
       </div>
       <div className="flex flex-col md:flex-row pt-4 md:pt-6 max-w-screen-2xl mx-auto divide-y md:divide-y-0 md:divide-x divide-violet-300">

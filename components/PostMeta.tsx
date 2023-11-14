@@ -4,17 +4,12 @@ import { PostWOContent } from "@typeDefs/page";
 
 interface StoryMetaProps {
   post: Post | PostWOContent;
-  addTopMargin: boolean;
   className?: string;
 }
 
 export default function PostMeta(props: StoryMetaProps) {
   return (
-    <p
-      className={`flex items-center text-xs ${props.className ?? ""} ${
-        props.addTopMargin ? "mt-3" : ""
-      }`}
-    >
+    <p className={`flex items-center text-xs ${props.className ?? ""}`}>
       {props.post.author}
       <IconPoint size={8} style={{ margin: "0px 4px" }} />
       {props.post.published}

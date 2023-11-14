@@ -13,9 +13,7 @@ export default function Stories({ data }: StoriesProps) {
   return (
     <>
       <div className="flex items-center justify-between mb-3">
-        <h2 className="text-2xl text-violet-300 font-serif">
-          Stories & Narratives
-        </h2>
+        <h2 className="text-2xl text-violet-300 ">Stories & Narratives</h2>
         <Link href="/stories" className="btn btn-sm btn-ghost">
           View All
         </Link>
@@ -38,12 +36,12 @@ export default function Stories({ data }: StoriesProps) {
             </Link>
             <Link
               href={`/stories/${story.slug}`}
-              className="text-2xl mt-3 text-white hover:text-violet-400 focus:text-violet-400 outline-none transition-colors font-serif whitespace-nowrap"
+              className="text-2xl mt-3 text-white hover:text-violet-400 focus:text-violet-400 outline-none transition-colors whitespace-nowrap font-display"
             >
               {story.title}
             </Link>
-            <p className="text-sm">{story.excerpt}</p>
-            <StoryMeta story={story} addTopMargin />
+            <p className="text-sm mb-2">{story.excerpt}</p>
+            <StoryMeta story={story} className="mt-auto" />
             <TagsList tags={story.tags} className="flex mt-3 gap-2" />
             <div className="hidden md:flex absolute justify-end gap-3 top-4 right-4">
               {i > 0 && (

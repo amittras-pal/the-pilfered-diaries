@@ -51,7 +51,7 @@ export default function CommentForm(props: { onClose: () => void }) {
       noValidate
       className="my-3"
     >
-      <p className="text-lg text-gray-400 font-serif">Add New Comment</p>
+      <p className="text-lg text-gray-400 ">Add New Comment</p>
       <div className="grid gap-3 grid-cols-1 md:grid-cols-2 mb-3">
         <Input
           label="Your Name"
