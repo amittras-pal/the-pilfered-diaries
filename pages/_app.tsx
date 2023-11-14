@@ -1,10 +1,10 @@
 import Navbar from "@components/Navbar";
-import ScrollReset from "@components/ScrollReset";
+import Analytics from "@components/client/Analytics";
+import ScrollReset from "@components/client/ScrollReset";
 import "@styles/globals.css";
 import { DefaultSeo } from "next-seo";
 import type { AppProps } from "next/app";
-import Analytics from "../components/Analytics";
-import { SITE_DESCRIPTION_ROOT, SITE_TITLE, SITE_URL } from "../constants/app";
+import { SITE_DESCRIPTION_ROOT, SITE_TITLE, SITE_URL } from "@constants/app";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

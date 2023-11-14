@@ -1,4 +1,4 @@
-import { StoryWOChaptersNContent } from "../../types/page";
+import { StoryWOChaptersNContent } from "@typeDefs/page";
 import StoryMeta from "../StoryMeta";
 
 export default function StoryHeader({

@@ -1,3 +1,5 @@
+import Divider from "@components/Divider";
+import SubscriptionForm from "@components/aside-cta/SubscriptionForm";
 import Header from "@components/home/Header";
 import Posts from "@components/home/Posts";
 import Stories from "@components/home/Stories";
@@ -12,8 +14,6 @@ import { PostDoc, SiteImageCfg, StoryDoc } from "@typeDefs/entities";
 import { HomeProps } from "@typeDefs/page";
 import { isoDateOfTimestamp } from "@utils/date.utils";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
-import Divider from "../components/Divider";
-import SubscriptionForm from "../components/aside-cta/SubscriptionForm";
 
 export default function Home({
   stories,

@@ -1,6 +1,4 @@
 import { Head, Html, Main, NextScript } from "next/document";
-import { DefaultSeo } from "next-seo";
-import { SITE_DESCRIPTION_ROOT, SITE_TITLE, SITE_URL } from "../constants/app";
 
 export default function Document() {
   return (

@@ -1,5 +1,6 @@
 "use client";
 
+import { SITE_TITLE } from "@constants/app";
 import { auth } from "@firebase/client.config";
 import { IconBrandGoogle } from "@tabler/icons-react";
 import {
@@ -10,7 +11,6 @@ import {
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { InferType, object, string } from "yup";
-import { SITE_TITLE } from "../../constants/app";
 
 const subscriptionSchema = object().shape({
   email: string()

@@ -10,8 +10,8 @@ import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { InferType, object, string } from "yup";
-import { firestore } from "../../firebase/client.config";
-import { CommentDoc } from "../../types/entities";
+import { firestore } from "@firebase/client.config";
+import { CommentDoc } from "@typeDefs/entities";
 import Loader from "../Loader";
 
 const commentSchema = object().shape({

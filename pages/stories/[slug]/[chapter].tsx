@@ -1,4 +1,6 @@
 import Divider from "@components/Divider";
+import SubmitOrDonateAside from "@components/aside-cta/AsideCTA";
+import Share from "@components/client/Share";
 import CommentsList from "@components/comments/CommentsList";
 import Markdown from "@components/markdown/Markdown";
 import ChapterHeader from "@components/stories/ChapterHeader";
@@ -11,6 +13,7 @@ import {
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { CommentDoc, StoryDoc } from "@typeDefs/entities";
 import { SingleChapterProps } from "@typeDefs/page";
+import { generateChapterTitle } from "@utils/app.utils";
 import { isoDateOfTimestamp } from "@utils/date.utils";
 import axios from "axios";
 import grayMatter from "gray-matter";
@@ -20,8 +23,6 @@ import { NextSeo } from "next-seo";
 import Link from "next/link";
 import { ParsedUrlQuery } from "querystring";
 import readingTime from "reading-time";
-import SubmitOrDonateAside from "../../../components/aside-cta/AsideCTA";
-import { generateChapterTitle } from "../../../utils/app.utils";
 
 export default function SingleChapter(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -83,6 +84,8 @@ export default function SingleChapter(
               </Link>
             )}
           </div>
+          <Divider direction="horizontal" className="my-3" />
+          <Share contentTitle={props.chapter.title} contentType="Story" />
           <Divider direction="horizontal" className="my-3" />
           <CommentsList
             comments={props.comments}

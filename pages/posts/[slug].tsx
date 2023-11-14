@@ -1,4 +1,6 @@
 import Divider from "@components/Divider";
+import SubmitOrDonateAside from "@components/aside-cta/AsideCTA";
+import Share from "@components/client/Share";
 import CommentsList from "@components/comments/CommentsList";
 import Markdown from "@components/markdown/Markdown";
 import SinglePostHeader from "@components/posts/PostHeader";
@@ -10,6 +12,7 @@ import {
 } from "@firebase/server.functions";
 import { CommentDoc, PostDoc } from "@typeDefs/entities";
 import { SinglePostProps } from "@typeDefs/page";
+import { generatePostTitle } from "@utils/app.utils";
 import { isoDateOfTimestamp } from "@utils/date.utils";
 import axios from "axios";
 import grayMatter from "gray-matter";
@@ -18,8 +21,6 @@ import { serialize } from "next-mdx-remote/serialize";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import readingTime from "reading-time";
-import SubmitOrDonateAside from "../../components/aside-cta/AsideCTA";
-import { generatePostTitle } from "../../utils/app.utils";
 
 export default function SinglePost(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -61,6 +62,8 @@ export default function SinglePost(
       >
         <div className="basis-9/12 px-0 md:px-2">
           <Markdown {...props.content} />
+          <Divider direction="horizontal" className="my-3" />
+          <Share contentTitle={props.metadata.title} contentType="Post" />
           <Divider direction="horizontal" className="my-3" />
           <CommentsList
             comments={props.comments}

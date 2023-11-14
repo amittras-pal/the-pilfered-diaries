@@ -7,7 +7,7 @@ import { Comment } from "@typeDefs/entities";
 import dayjs from "dayjs";
 import dynamic from "next/dynamic";
 import React from "react";
-import { dateTimeFormat } from "../../utils/date.utils";
+import { dateTimeFormat } from "@utils/date.utils";
 
 interface CommentsListProps {
   comments: Comment[];

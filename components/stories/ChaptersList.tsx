@@ -1,6 +1,6 @@
 import { IconArrowRight } from "@tabler/icons-react";
+import { ChapterWOContent } from "@typeDefs/page";
 import Link from "next/link";
-import { ChapterWOContent } from "../../types/page";
 
 export default function ChaptersList({
   chapters,

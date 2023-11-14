@@ -8,7 +8,7 @@ import {
   IconBrandWhatsapp,
 } from "@tabler/icons-react";
 import { getAnalytics, logEvent } from "firebase/analytics";
-import { SITE_TITLE, SITE_URL } from "../../constants/app";
+import { SITE_TITLE, SITE_URL } from "@constants/app";
 
 interface ShareProps {
   contentTitle: string;

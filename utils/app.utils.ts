@@ -1,11 +1,11 @@
-import { ReadTimeResults } from "reading-time";
-import { SITE_TITLE } from "../constants/app";
-import { Story } from "../types/entities";
+import { SITE_TITLE } from "@constants/app";
+import { Story } from "@typeDefs/entities";
 import {
   ChapterWOContent,
   SinglePostMetadata,
   StoryWOChaptersNContent,
-} from "../types/page";
+} from "@typeDefs/page";
+import { ReadTimeResults } from "reading-time";
 
 export function baseUrl(path: string): string {
   return process.env.NEXT_PUBLIC_SITE_URL + path;

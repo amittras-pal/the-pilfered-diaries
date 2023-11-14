@@ -1,6 +1,6 @@
+import { StoryWOChaptersNContent } from "@typeDefs/page";
 import Image from "next/image";
 import Link from "next/link";
-import { StoryWOChaptersNContent } from "../../types/page";
 import StoryMeta from "../StoryMeta";
 import TagsList from "../TagsList";
 

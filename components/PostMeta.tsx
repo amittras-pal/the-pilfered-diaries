@@ -2,7 +2,7 @@ import { IconPoint } from "@tabler/icons-react";
 import { Post } from "@typeDefs/entities";
 import { PostWOContent } from "@typeDefs/page";
 import dayjs from "dayjs";
-import { dateFormat } from "../utils/date.utils";
+import { dateFormat } from "@utils/date.utils";
 
 interface StoryMetaProps {
   post: Post | PostWOContent;

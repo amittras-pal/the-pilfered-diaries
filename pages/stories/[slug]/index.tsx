@@ -1,4 +1,6 @@
 import Divider from "@components/Divider";
+import SubmitOrDonateAside from "@components/aside-cta/AsideCTA";
+import Share from "@components/client/Share";
 import CommentsList from "@components/comments/CommentsList";
 import Markdown from "@components/markdown/Markdown";
 import ChaptersList from "@components/stories/ChaptersList";
@@ -11,14 +13,13 @@ import {
 } from "@firebase/server.functions";
 import { CommentDoc, StoryDoc } from "@typeDefs/entities";
 import { SingleStoryProps } from "@typeDefs/page";
+import { generateStoryTitle } from "@utils/app.utils";
 import { isoDateOfTimestamp } from "@utils/date.utils";
 import axios from "axios";
 import grayMatter from "gray-matter";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import { NextSeo } from "next-seo";
-import SubmitOrDonateAside from "../../../components/aside-cta/AsideCTA";
-import { generateStoryTitle } from "../../../utils/app.utils";
 
 export default function SingleStory(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -59,6 +60,8 @@ export default function SingleStory(
           <Markdown {...props.preface} />
           <Divider direction="horizontal" className="my-3" />
           <ChaptersList chapters={props.chapters} slug={props.metadata.slug} />
+          <Divider direction="horizontal" className="my-3" />
+          <Share contentTitle={props.metadata.title} contentType="Story" />
           <Divider direction="horizontal" className="my-3" />
           <CommentsList
             comments={props.comments}
