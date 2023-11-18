@@ -10,7 +10,7 @@ export default function Analytics() {
 
   useEffect(() => {
     const analytics = getAnalytics(app);
-    logEvent(analytics, "page_view");
+    if (asPath !== "/admin") logEvent(analytics, "page_view");
   }, [asPath]);
 
   return null;

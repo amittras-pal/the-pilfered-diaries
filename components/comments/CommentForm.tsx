@@ -2,16 +2,15 @@
 
 import Input from "@components/form/Input";
 import TextArea from "@components/form/TextArea";
-import { auth } from "@firebase/client.config";
+import { auth, firestore } from "@firebase/client.config";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IconMessage2Check, IconMessage2X } from "@tabler/icons-react";
+import { CommentDoc } from "@typeDefs/entities";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { InferType, object, string } from "yup";
-import { firestore } from "@firebase/client.config";
-import { CommentDoc } from "@typeDefs/entities";
 import Loader from "../Loader";
 
 const commentSchema = object().shape({
@@ -58,7 +57,7 @@ export default function CommentForm(props: CommentFormProps) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
+      if (user && user.uid !== process.env.NEXT_PUBLIC_ADMIN_ID) {
         setValue("userName", user.displayName ?? "");
         setValue("email", user.email ?? "");
         setUser(user);
@@ -69,6 +68,8 @@ export default function CommentForm(props: CommentFormProps) {
   }, [setFocus, setValue]);
 
   const onSubmit: SubmitHandler<CommentForm> = async (values) => {
+    console.log(values.body);
+
     const commentDoc: CommentDoc = {
       userName: values.userName,
       title: values.title,
@@ -140,6 +141,7 @@ export default function CommentForm(props: CommentFormProps) {
             className="col-span-1 md:col-span-2"
             help="Your Comment will be made public within 24 hours."
             disabled={submitting || commentSaved}
+            {...register("body")}
           />
         </div>
 
