@@ -28,7 +28,6 @@ function Input(
       <input
         {...rest}
         ref={ref}
-        type="text"
         className={`input input-bordered input-sm w-full ${
           error ? "input-error" : ""
         }`}

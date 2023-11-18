@@ -19,14 +19,8 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { InferType, object, string } from "yup";
+import { LoginForm, loginSchema } from "./schemas";
 
-const loginSchema = object().shape({
-  email: string().email("Invalid Identity.").required("Identity is required."),
-  password: string().required("Password is required."),
-});
-
-type LoginForm = InferType<typeof loginSchema>;
 interface LoginProps {
   prohibited: boolean;
 }

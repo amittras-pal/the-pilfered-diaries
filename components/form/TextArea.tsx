@@ -9,10 +9,11 @@ interface Props extends TextareaProps {
   label?: string;
   error?: string;
   help?: string;
+  resize?: "both" | "horizontal" | "vertical" | "none";
 }
 
 function TextArea(
-  { label, error, help, className, ...rest }: Props,
+  { label, error, help, className, resize = "none", ...rest }: Props,
   ref: ForwardedRef<HTMLTextAreaElement>
 ) {
   return (
@@ -28,9 +29,10 @@ function TextArea(
       <textarea
         {...rest}
         ref={ref}
+        style={{ resize }}
         className={`textarea textarea-bordered textarea-sm ${
           error ? "textarea-error" : ""
-        }`}
+        } `}
       />
       {help && !error && (
         <label className="label">

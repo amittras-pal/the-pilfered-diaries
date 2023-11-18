@@ -1,6 +1,8 @@
 import { IconPoint } from "@tabler/icons-react";
 import { SinglePostMetadata } from "@typeDefs/page";
 import { getReadingTime } from "@utils/app.utils";
+import dayjs from "dayjs";
+import { dateFormat } from "../../constants/app";
 
 export default function SinglePostHeader({
   metadata,
@@ -20,7 +22,9 @@ export default function SinglePostHeader({
             <IconPoint size={16} />
             <span>{getReadingTime(metadata.readingTime)}</span>
             <IconPoint size={16} />
-            <span>{metadata.published}</span>
+            <span suppressHydrationWarning>
+              {dayjs(metadata.published).format(dateFormat)}
+            </span>
           </p>
           <p className="text-sm text-violet-200">{metadata.excerpt}</p>
         </div>

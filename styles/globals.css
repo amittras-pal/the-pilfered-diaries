@@ -16,8 +16,12 @@
     @apply font-display;
   }
   p,
-  a {
+  a,
+  label {
     @apply font-body;
+  }
+  label {
+    @apply cursor-pointer;
   }
 }
 
