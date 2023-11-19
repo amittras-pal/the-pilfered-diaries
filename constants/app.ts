@@ -2,7 +2,7 @@ export const SITE_TITLE = process.env.NEXT_PUBLIC_SITE_TITLE;
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL;
 export const DISPLAY_TAGS = 3;
 export const SUB_POPUP_DELAY = 15000;
-export const REVAL_TIME = 24 * 60;
+export const REVAL_TIME = 21600; // 6 Hours in seconds.
 export const AVG_WPM = 250; // words per minute.
 export const defaultAuthor = "Amittras";
 

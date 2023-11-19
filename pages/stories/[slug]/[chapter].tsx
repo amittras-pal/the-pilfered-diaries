@@ -14,7 +14,6 @@ import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { CommentDoc, StoryDoc } from "@typeDefs/entities";
 import { SingleChapterProps } from "@typeDefs/page";
 import { generateChapterTitle, isoDateOfTimestamp } from "@utils/app.utils";
-import axios from "axios";
 import grayMatter from "gray-matter";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
@@ -22,6 +21,7 @@ import { NextSeo } from "next-seo";
 import Link from "next/link";
 import { ParsedUrlQuery } from "querystring";
 import readingTime from "reading-time";
+import { getFile } from "../../../axios.services";
 
 export default function SingleChapter(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -137,8 +137,8 @@ export const getStaticProps: GetStaticProps<
     return { redirect: { destination: "/content-x", statusCode: 307 } };
 
   const commentsRes = await getComments("stories", params?.slug ?? "");
-  const file = await axios.get(chapter.content ?? "");
-  const { content } = grayMatter(file.data);
+  const file = await getFile(chapter.content ?? "");
+  const { content } = grayMatter(file);
   const readTime = readingTime(content, { wordsPerMinute: AVG_WPM });
 
   delete chapter.content;

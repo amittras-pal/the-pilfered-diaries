@@ -88,8 +88,7 @@ export default function NewStory() {
           };
           const docRef = doc(firestore, "stories", form.slug);
           await setDoc(docRef, story);
-
-          // TODO: refresh Pages.
+          // Page refresh not required; since new story is always initiated as draft.
           setUploadStatus("Completed.");
           setTimeout(completeProcessing, 500);
         } catch (error) {

@@ -3,7 +3,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { IconSend } from "@tabler/icons-react";
 import { Timestamp, doc, setDoc } from "firebase/firestore";
 import {
-  StorageError,
   UploadTask,
   getDownloadURL,
   ref,
@@ -11,6 +10,7 @@ import {
 } from "firebase/storage";
 import { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { revalidatePages } from "../../../axios.services";
 import { PostDoc } from "../../../types/entities";
 import Loader from "../../Loader";
 import FileInput from "../../form/FileInput";
@@ -92,7 +92,11 @@ export default function NewPost() {
           const docRef = doc(firestore, "posts", form.slug);
           await setDoc(docRef, post);
 
-          // TODO: refresh Pages.
+          if (!form.draft) {
+            setUploadStatus("Refreshing Site Pages");
+            await revalidatePages(form.refreshPassword ?? "", ["/", "/posts"]);
+          }
+
           setUploadStatus("Completed.");
           setTimeout(completeProcessing, 500);
         } catch (error) {

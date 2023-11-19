@@ -2,7 +2,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { IconSend, IconX } from "@tabler/icons-react";
 import { Timestamp, doc, setDoc } from "firebase/firestore";
 import {
-  StorageError,
   UploadTask,
   getDownloadURL,
   ref,
@@ -10,6 +9,7 @@ import {
 } from "firebase/storage";
 import { useCallback, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { revalidatePages } from "../../../axios.services";
 import { firestore, storage } from "../../../firebase/client.config";
 import { Story } from "../../../types/entities";
 import Loader from "../../Loader";
@@ -58,7 +58,7 @@ export default function NewChapter() {
   };
 
   const onFSSuccess = async (task: UploadTask) => {
-    setUploadStatus("Updating Records...");
+    setUploadStatus("Updating Records");
     const form = getValues();
     const url = await getDownloadURL(task.snapshot.ref);
     const chapter = {
@@ -90,6 +90,13 @@ export default function NewChapter() {
 
     const storyRef = doc(firestore, "stories", targetStory?.slug ?? "");
     await setDoc(storyRef, storyUpdate, { merge: true });
+
+    setUploadStatus("Refreshing Pages");
+    await revalidatePages(form.refreshPassword ?? "", [
+      "/",
+      "/stories",
+      `/stories/${targetStory?.slug ?? ""}`,
+    ]);
 
     completeProcessing();
   };

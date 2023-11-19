@@ -13,13 +13,13 @@ import {
 import { CommentDoc, PostDoc } from "@typeDefs/entities";
 import { SinglePostProps } from "@typeDefs/page";
 import { generatePostTitle, isoDateOfTimestamp } from "@utils/app.utils";
-import axios from "axios";
 import grayMatter from "gray-matter";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import readingTime from "reading-time";
+import { getFile } from "../../axios.services";
 
 export default function SinglePost(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -95,8 +95,8 @@ export const getStaticProps: GetStaticProps<
     return { redirect: { destination: "/content-x", statusCode: 307 } };
 
   const commentsRes = await getComments("posts", params?.slug ?? "");
-  const file = await axios.get(post.content ?? "");
-  const { content } = grayMatter(file.data);
+  const file = await getFile(post.content ?? "");
+  const { content } = grayMatter(file);
 
   delete post.content;
 

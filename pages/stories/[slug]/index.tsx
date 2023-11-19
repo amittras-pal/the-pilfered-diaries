@@ -14,11 +14,11 @@ import {
 import { CommentDoc, StoryDoc } from "@typeDefs/entities";
 import { SingleStoryProps } from "@typeDefs/page";
 import { generateStoryTitle, isoDateOfTimestamp } from "@utils/app.utils";
-import axios from "axios";
 import grayMatter from "gray-matter";
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import { serialize } from "next-mdx-remote/serialize";
 import { NextSeo } from "next-seo";
+import { getFile } from "../../../axios.services";
 
 export default function SingleStory(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -93,8 +93,8 @@ export const getStaticProps: GetStaticProps<
     return { redirect: { destination: "/content-x", statusCode: 307 } };
 
   const commentsRes = await getComments("stories", params?.slug ?? "");
-  const prefaceFile = await axios.get(story.content ?? "");
-  const { content: preface } = grayMatter(prefaceFile.data);
+  const prefaceFile = await getFile(story.content ?? "");
+  const { content: preface } = grayMatter(prefaceFile);
 
   const metadata = {
     ...story,
