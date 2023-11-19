@@ -32,12 +32,7 @@ const authorTest = string()
     },
   });
 
-const titleTest = string()
-  .required("Title is required")
-  .matches(
-    /^[A-Za-z0-9\s]*$/,
-    "Title must have only alphanumeric characters and spaces."
-  );
+const titleTest = string().required("Title is required");
 
 export const postSchema = object().shape({
   title: titleTest,
