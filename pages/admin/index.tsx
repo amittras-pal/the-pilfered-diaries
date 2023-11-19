@@ -40,35 +40,33 @@ const FilePreview = dynamic(
 );
 
 const Admin = () => {
-  const [adminAuthenticated, setAdminAuthenticated] = useState(false);
+  const [userType, setUserType] = useState<"admin" | "other" | "none">("none");
   const [activeModule, setactiveModule] = useState("login");
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        // TODO: Validate this.
-        setAdminAuthenticated(user.uid === process.env.NEXT_PUBLIC_ADMIN_ID);
+        setUserType(
+          user.uid === process.env.NEXT_PUBLIC_ADMIN_ID ? "admin" : "other"
+        );
         setactiveModule("home");
-      } else setAdminAuthenticated(true);
+      } else setUserType("none");
     });
     return unsubscribe;
   }, []);
 
+  if (["other", "none"].includes(userType))
+    return <Login prohibited={userType === "other"} />;
+
   return (
-    <>
-      {activeModule === "login" ? (
-        <Login prohibited={!adminAuthenticated} />
-      ) : (
-        <AdminLayout active={activeModule} onChange={setactiveModule}>
-          {activeModule === "home" && <Home />}
-          {activeModule === "comments" && <Comments />}
-          {activeModule === "post" && <NewPost />}
-          {activeModule === "story" && <NewStory />}
-          {activeModule === "chapter" && <NewChapter />}
-          {activeModule === "file" && <FilePreview />}
-        </AdminLayout>
-      )}
-    </>
+    <AdminLayout active={activeModule} onChange={setactiveModule}>
+      {activeModule === "home" && <Home />}
+      {activeModule === "comments" && <Comments />}
+      {activeModule === "post" && <NewPost />}
+      {activeModule === "story" && <NewStory />}
+      {activeModule === "chapter" && <NewChapter />}
+      {activeModule === "file" && <FilePreview />}
+    </AdminLayout>
   );
 };
 

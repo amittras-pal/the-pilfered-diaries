@@ -101,6 +101,7 @@ const Login = ({ prohibited }: LoginProps) => {
           />
           <Input
             {...register("password")}
+            type="password"
             placeholder="Password"
             error={errors.email?.message}
             className="mb-3"

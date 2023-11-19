@@ -46,7 +46,7 @@ export default function FilePreview() {
         )}
       </div>
       {fileContent !== null && (
-        <div className="flex-grow overflow-y-auto p-2">
+        <div className="flex-grow overflow-y-auto scroll-smooth p-2">
           <Markdown {...fileContent} />
         </div>
       )}
