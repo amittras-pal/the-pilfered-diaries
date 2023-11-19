@@ -26,6 +26,7 @@ function Input(
         </label>
       )}
       <input
+        autoComplete="off"
         {...rest}
         ref={ref}
         className={`input input-bordered input-sm w-full ${

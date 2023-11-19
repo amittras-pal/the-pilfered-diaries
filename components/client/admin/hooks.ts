@@ -1,5 +1,5 @@
 import { firestore } from "@firebase/client.config";
-import { Comment, CommentDoc } from "@typeDefs/entities";
+import { Comment, CommentDoc, StoryDoc } from "@typeDefs/entities";
 import dayjs from "dayjs";
 import {
   collection,
@@ -34,4 +34,24 @@ export function useCommentsList() {
   }, []);
 
   return comments;
+}
+
+export function useWIPStories() {
+  const [stories, setStories] = useState<any[]>([]);
+
+  useEffect(() => {
+    const q = query(collection(firestore, "stories"), where("wip", "==", true));
+    return onSnapshot(q, (s) => {
+      const stories = s.docs.map((doc) => {
+        const story = doc.data() as StoryDoc;
+        return {
+          ...story,
+          slug: doc.id,
+        };
+      });
+      setStories(stories);
+    });
+  }, []);
+
+  return stories;
 }

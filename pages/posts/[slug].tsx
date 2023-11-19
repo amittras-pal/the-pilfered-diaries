@@ -29,8 +29,6 @@ export default function SinglePost(
   // TODO: also set up loader for other ISR pages.
   if (router.isFallback) return "Loading...";
 
-  props.content;
-
   return (
     <>
       <NextSeo

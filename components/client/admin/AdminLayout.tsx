@@ -10,6 +10,7 @@ const modules = [
   { label: "Add Story", key: "story" },
   { label: "Add Chapter to Story", key: "chapter" },
   { label: "Add Single Post", key: "post" },
+  { label: "Preview File", key: "file" },
 ];
 
 const AdminLayout = (props: AdminLayoutProps) => {
@@ -31,7 +32,7 @@ const AdminLayout = (props: AdminLayoutProps) => {
           </button>
         ))}
       </div>
-      <div className="basis-4/5 p-3 overflow-auto">{props.children}</div>
+      <div className="basis-4/5 p-2 overflow-auto">{props.children}</div>
     </div>
   );
 };

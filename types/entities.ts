@@ -20,7 +20,7 @@ export interface StoryDoc {
   cover: string;
   draft: boolean;
   excerpt: string;
-  id: string;
+  id?: string;
   lastUpdated: Timestamp;
   published: Timestamp;
   tags: string[];

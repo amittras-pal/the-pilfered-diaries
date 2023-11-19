@@ -4,6 +4,7 @@ export const DISPLAY_TAGS = 3;
 export const SUB_POPUP_DELAY = 15000;
 export const REVAL_TIME = 24 * 60;
 export const AVG_WPM = 250; // words per minute.
+export const defaultAuthor = "Amittras";
 
 export const APP_TITLE = "The Pilfered Diaries";
 export const INSTA_HANDLE = "/the.pilfered.diaries";

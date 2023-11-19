@@ -17,11 +17,14 @@ export const numCompacter = Intl.NumberFormat("en-US", {
   maximumFractionDigits: 1,
 });
 
-export function getReadingTime(readTime: ReadTimeResults): string {
+export function getReadingTime(
+  readTime: ReadTimeResults,
+  compact: boolean = true
+): string {
   const time = readTime.text.split(" ").slice(0, 2).join(" ");
   const words = numCompacter.format(readTime.words);
 
-  return `${time} (${words} words)`;
+  return `${time} (${compact ? words : readTime.words} words)`;
 }
 
 export function generatePostTitle(post: SinglePostMetadata) {
