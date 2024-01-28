@@ -21,7 +21,11 @@ const subscriptionSchema = object().shape({
 
 type SubscriptionForm = InferType<typeof subscriptionSchema>;
 
-export default function SubscriptionForm() {
+type SubscriptionConfigProps = {
+  inModal?: boolean;
+};
+
+export default function SubscriptionForm(props: SubscriptionConfigProps) {
   const [user, setUser] = useState<User | null>(null);
   const subscribe: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
@@ -39,28 +43,39 @@ export default function SubscriptionForm() {
   }, []);
 
   return (
-    <div className="mb-3">
-      <h4 className={`text-xl text-${user ? "green" : "red"}-300`}>
-        {user ? "You are Subscribed!" : "Follow for More..."}
-      </h4>
-      {user ? (
-        <p className="text-sm">
-          You are receiving our monthly newletter on your email{" "}
-          <span className="text-gray-200">{user.email}</span>
-        </p>
-      ) : (
-        <p className="text-sm">
-          Subscribe to the monthly newletter from {SITE_TITLE} to stay updated
-          of new single posts, stories and new chapters to your favorite ongoing
-          stories.
-        </p>
-      )}
-      {!user && (
+    <>
+      {props.inModal ? (
         <button className="btn btn-sm btn-ghost mt-3" onClick={subscribe}>
           <IconBrandGoogle size={18} />
           Subscribe with Google
         </button>
+      ) : (
+        <>
+          <div className="mb-3">
+            <h4 className={`text-xl text-${user ? "green" : "red"}-300`}>
+              {user ? "You are Subscribed!" : "Follow for More..."}
+            </h4>
+            {user ? (
+              <p className="text-sm">
+                You are receiving our monthly newletter on your email{" "}
+                <span className="text-gray-200">{user.email}</span>
+              </p>
+            ) : (
+              <p className="text-sm">
+                Subscribe to the monthly newletter from {SITE_TITLE} to stay
+                updated of new single posts, stories and new chapters to your
+                favorite ongoing stories.
+              </p>
+            )}
+            {!user && (
+              <button className="btn btn-sm btn-ghost mt-3" onClick={subscribe}>
+                <IconBrandGoogle size={18} />
+                Subscribe with Google
+              </button>
+            )}
+          </div>
+        </>
       )}
-    </div>
+    </>
   );
 }

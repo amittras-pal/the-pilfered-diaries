@@ -1,8 +1,9 @@
-import firestore from "./server.config";
+import admin from "./server.config";
 
 // List of published stories.
 export function getStories(limit: number) {
-  return firestore
+  return admin
+    .firestore()
     .collection("stories")
     .where("draft", "==", false)
     .orderBy("lastUpdated", "desc")
@@ -13,13 +14,15 @@ export function getStories(limit: number) {
 // List of published posts.
 export function getPosts(type: "guest" | "owned" | "all", limit: number) {
   return type === "all"
-    ? firestore
+    ? admin
+        .firestore()
         .collection("posts")
         .where("draft", "==", false)
         .orderBy("published", "desc")
         .limit(limit)
         .get()
-    : firestore
+    : admin
+        .firestore()
         .collection("posts")
         .where("draft", "==", false)
         .where("byGuest", "==", type === "guest")
@@ -30,27 +33,41 @@ export function getPosts(type: "guest" | "owned" | "all", limit: number) {
 
 // Site Header/Images configuration.
 export function getSiteImageCfg() {
-  return firestore.doc("siteContent/site-config").get();
+  return admin.firestore().doc("siteContent/site-config").get();
 }
 
 // Used for paths list via getStaticPaths in the respective dynamic routes.
 export function getAllPublishedPosts() {
-  return firestore.collection("posts").where("draft", "==", false).get();
+  return admin
+    .firestore()
+    .collection("posts")
+    .where("draft", "==", false)
+    .get();
 }
 
 // Used for paths list via getStaticPaths in the respective dynamic routes.
 export function getAllPublishedStories() {
-  return firestore.collection("stories").where("draft", "==", false).get();
+  return admin
+    .firestore()
+    .collection("stories")
+    .where("draft", "==", false)
+    .get();
 }
 
 // Used for data via getStaticProps in the respective dynamic routes.
 export function getSinglePost(slug: string) {
-  return firestore.doc("posts/" + slug).get();
+  return admin
+    .firestore()
+    .doc("posts/" + slug)
+    .get();
 }
 
 // Used for data via getStaticProps in the respective dynamic routes.
 export function getSingleStory(slug: string) {
-  return firestore.doc("stories/" + slug).get();
+  return admin
+    .firestore()
+    .doc("stories/" + slug)
+    .get();
 }
 
 // Get comments for a specific post/story
@@ -58,7 +75,8 @@ export function getComments(
   contentType: "stories" | "posts",
   contentId: string
 ) {
-  return firestore
+  return admin
+    .firestore()
     .collection("comments")
     .where("type", "==", contentType)
     .where("target", "==", contentId)

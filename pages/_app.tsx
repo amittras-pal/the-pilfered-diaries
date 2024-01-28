@@ -1,10 +1,11 @@
 import Navbar from "@components/Navbar";
 import Analytics from "@components/client/Analytics";
 import ScrollReset from "@components/client/ScrollReset";
+import { SITE_DESCRIPTION_ROOT, SITE_TITLE, SITE_URL } from "@constants/app";
 import "@styles/globals.css";
 import { DefaultSeo } from "next-seo";
 import type { AppProps } from "next/app";
-import { SITE_DESCRIPTION_ROOT, SITE_TITLE, SITE_URL } from "@constants/app";
+import Subscribe from "../components/client/Subscribe";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -31,6 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <ScrollReset />
       <Analytics />
       <Navbar />
+      <Subscribe />
       <main className="grow overflow-y-auto scroll-smooth" id="main">
         <Component {...pageProps} />
       </main>
