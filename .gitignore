@@ -35,4 +35,5 @@ yarn-error.log*
 next-env.d.ts
 
 # CMS
-/content
+/content/node_modules
+/content/draft

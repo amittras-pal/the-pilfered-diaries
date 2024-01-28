@@ -68,8 +68,6 @@ export default function CommentForm(props: CommentFormProps) {
   }, [setFocus, setValue]);
 
   const onSubmit: SubmitHandler<CommentForm> = async (values) => {
-    console.log(values.body);
-
     const commentDoc: CommentDoc = {
       userName: values.userName,
       title: values.title,

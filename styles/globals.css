@@ -32,4 +32,7 @@
   .btn {
     @apply font-display font-semibold;
   }
+  .modal::backdrop {
+    @apply backdrop-blur-sm;
+  }
 }
