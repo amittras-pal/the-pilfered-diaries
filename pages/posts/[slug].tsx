@@ -20,6 +20,7 @@ import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import readingTime from "reading-time";
 import { getFile } from "../../axios.services";
+import TextSizeControl from "../../components/TextSizeControl";
 
 export default function SinglePost(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -73,6 +74,7 @@ export default function SinglePost(
         </div>
         <SubmitOrDonateAside />
       </div>
+      <TextSizeControl />
     </>
   );
 }

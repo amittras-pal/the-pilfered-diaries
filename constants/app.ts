@@ -17,3 +17,4 @@ export const SITE_DESCRIPTION_ROOT =
 
 export const dateFormat = "MMM DD, 'YY";
 export const dateTimeFormat = "MMM DD, 'YY, hh:mm A";
+export const FONT_SIZE_RANGE = [15, 22];

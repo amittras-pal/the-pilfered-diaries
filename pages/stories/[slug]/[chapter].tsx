@@ -22,6 +22,7 @@ import Link from "next/link";
 import { ParsedUrlQuery } from "querystring";
 import readingTime from "reading-time";
 import { getFile } from "../../../axios.services";
+import TextSizeControl from "../../../components/TextSizeControl";
 
 export default function SingleChapter(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -95,6 +96,7 @@ export default function SingleChapter(
         </div>
         <SubmitOrDonateAside />
       </div>
+      <TextSizeControl />
     </>
   );
 }
