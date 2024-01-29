@@ -1,4 +1,4 @@
-import firestore from "@firebase/server.config";
+import admin from "@firebase/server.config";
 import { GetServerSideProps } from "next";
 import { SITE_URL } from "../constants/app";
 import { PostDoc, StoryDoc } from "../types/entities";
@@ -44,7 +44,8 @@ export const getServerSideProps: GetServerSideProps<{}> = async (ctx) => {
 };
 
 function getAllStories() {
-  return firestore
+  return admin
+    .firestore()
     .collection("stories")
     .where("draft", "==", false)
     .orderBy("lastUpdated", "desc")
@@ -52,7 +53,8 @@ function getAllStories() {
 }
 
 function getAllPosts() {
-  return firestore
+  return admin
+    .firestore()
     .collection("posts")
     .where("draft", "==", false)
     .orderBy("published", "desc")
