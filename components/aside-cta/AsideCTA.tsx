@@ -7,7 +7,7 @@ import SubscriptionForm from "./SubscriptionForm";
 export default function SubmitOrDonateAside() {
   return (
     <aside className="basis-3/12 h-fit px-6 py-4 md:pt-0 md:px-4 mb-4 sticky top-0 ">
-      <SubscriptionForm />
+      <SubscriptionForm btnLeft />
       <Divider className="my-3" direction="horizontal" />
       <h4 className="text-xl text-violet-300">Submit Your Own...</h4>
       <p className="mt-3 text-sm">

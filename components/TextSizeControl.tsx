@@ -56,7 +56,7 @@ export default function TextSizeControl() {
         visible ? "opacity-100" : "opacity-0"
       }`}
     >
-      <div className="relative flex items-center bg-gray-800 border border-gray-500 rounded-md">
+      <div className="relative flex items-center bg-purple-900 rounded-md">
         {menu && (
           <>
             <span className="mx-2 text-white">Font Size: </span>

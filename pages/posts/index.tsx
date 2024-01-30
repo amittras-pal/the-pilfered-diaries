@@ -35,7 +35,7 @@ export default function PostsList({
           Singles & Short Fiction on {SITE_TITLE}...
         </h1>
       </div>
-      <div className="flex flex-col md:flex-row pt-4 md:pt-6 max-w-screen-2xl mx-auto divide-y md:divide-y-0 md:divide-x divide-violet-300">
+      <div className="flex flex-col md:flex-row pt-4 md:pt-6 max-w-screen-2xl mx-auto divide-y md:divide-y-0 md:divide-x divide-violet-300 mb-4">
         <div className="basis-9/12 px-2 md:px-4">
           {posts.map((post) => (
             <Post {...post} key={post.slug} />

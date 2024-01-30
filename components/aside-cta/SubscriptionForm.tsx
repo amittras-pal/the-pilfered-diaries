@@ -23,6 +23,7 @@ type SubscriptionForm = InferType<typeof subscriptionSchema>;
 
 type SubscriptionConfigProps = {
   inModal?: boolean;
+  btnLeft?: boolean;
 };
 
 export default function SubscriptionForm(props: SubscriptionConfigProps) {
@@ -58,8 +59,13 @@ export default function SubscriptionForm(props: SubscriptionConfigProps) {
               updated of new single posts, stories and new chapters to your
               favorite ongoing stories.
             </p>
-            <div className="flex justify-center mt-3">
-              <button className="btn btn-sm btn-ghost" onClick={subscribe}>
+            <div
+              className={`flex mt-3 ${props.btnLeft ? "" : "justify-center"}`}
+            >
+              <button
+                className="btn btn-outline w-full md:w-fit text-violet-400"
+                onClick={subscribe}
+              >
                 <IconBrandGoogle size={18} />
                 Subscribe with Google
               </button>

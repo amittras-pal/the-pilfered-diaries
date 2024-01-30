@@ -10,7 +10,7 @@ export default function SubmitContent() {
       <h2 className="text-2xl text-violet-300 mb-3">
         Want to see your content here?
       </h2>
-      <div className="flex gap-2 flex-col items-center md:flex-row">
+      <div className="flex gap-4 flex-col items-center md:flex-row">
         <Image
           src={logo}
           width={130}
@@ -32,7 +32,7 @@ export default function SubmitContent() {
       </div>
       <Link
         href="/submissions"
-        className="btn mt-3 w-full md:w-fit btn-warning font-sans justify-between"
+        className="mt-3 btn btn-outline w-full md:w-fit text-violet-400 font-sans justify-between"
       >
         Explore Submissions... <IconArrowRight size={20} />
       </Link>

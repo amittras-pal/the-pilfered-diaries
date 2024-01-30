@@ -107,9 +107,9 @@ export default function Submissions() {
         <h4 className="tex-xl mb-8 text-violet-400">
           That you would like to share on {SITE_TITLE}...
         </h4>
-        <h4 className="mb-4">Wondering How??</h4>
+        <h4>Wondering How??</h4>
       </div>
-      <div className="container mx-auto px-2 md:px-3">
+      <div className="max-w-screen-xl mx-auto px-2 md:px-3">
         <div className="collapse bg-base-200 mb-3 rounded-lg">
           <input
             type="radio"

@@ -19,25 +19,25 @@ const platforms = [
   {
     name: "whatsapp",
     path: "https://api.whatsapp.com/send",
-    icon: <IconBrandWhatsapp size={16} />,
+    icon: <IconBrandWhatsapp size={18} />,
     label: "Whatsapp",
   },
   {
     name: "facebook",
     path: "https://www.facebook.com/sharer.php",
-    icon: <IconBrandFacebook size={16} />,
+    icon: <IconBrandFacebook size={18} />,
     label: "Facebook",
   },
   {
     name: "twitter",
     path: "https://twitter.com/intent/tweet",
-    icon: <IconBrandTwitter size={16} />,
+    icon: <IconBrandTwitter size={18} />,
     label: "Twitter",
   },
   {
     name: "linkedin",
     path: "https://www.linkedin.com/shareArticle",
-    icon: <IconBrandLinkedin size={16} />,
+    icon: <IconBrandLinkedin size={18} />,
     label: "LinkedIn",
   },
 ];

@@ -17,6 +17,7 @@ export default function Header({ cfg }: { cfg: SiteImageCfg }) {
           </p>
           <a
             target="_blank"
+            rel="noopener noreferrer"
             href={INSTA_LINK}
             className="btn btn-ghost btn-sm gap-0"
           >

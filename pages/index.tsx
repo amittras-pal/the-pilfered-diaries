@@ -14,6 +14,7 @@ import { PostDoc, SiteImageCfg, StoryDoc } from "@typeDefs/entities";
 import { HomeProps } from "@typeDefs/page";
 import { isoDateOfTimestamp } from "@utils/app.utils";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
+import About from "../components/home/About";
 
 export default function Home({
   stories,
@@ -23,7 +24,10 @@ export default function Home({
   return (
     <div id="home_page">
       <Header cfg={headerCfg} />
-      <div className="flex flex-col md:flex-row gap-2 md:gap-3 max-w-screen-2xl mx-auto py-4 px-2 md:px-3">
+      <section className="max-w-screen-2xl mx-auto py-4 px-3 shadow-md">
+        <About image={headerCfg.profileHome} />
+      </section>
+      <div className="flex flex-col md:flex-row gap-6 md:gap-3 max-w-screen-2xl mx-auto py-4 px-3">
         <section className="basis-3/5 flex flex-col">
           <Stories data={stories} />
         </section>
@@ -35,14 +39,12 @@ export default function Home({
         direction="horizontal"
         className="mt-3 max-w-xs md:max-w-screen-md mx-auto bg-purple-400"
       />
-      <section className="flex flex-col md:flex-row gap-2 md:gap-3 max-w-screen-2xl mx-auto py-4 px-2 md:px-3">
-        <div className="basis-3/5">
+      <div className="bg-gradient-to-b md:bg-gradient-to-r from-transparent via-purple-900 to-transparent">
+        <section className="flex flex-col gap-4 max-w-screen-md mx-auto py-4 px-3">
           <SubmitContent />
-        </div>
-        <div className="basis-2/5">
-          <SubscriptionForm />
-        </div>
-      </section>
+          <SubscriptionForm btnLeft />
+        </section>
+      </div>
     </div>
   );
 }
@@ -50,7 +52,7 @@ export default function Home({
 export const getStaticProps: GetStaticProps<HomeProps> = async (_ctx) => {
   const [storiesRes, postsRes, imageCfgRes] = await Promise.all([
     getStories(5),
-    getPosts("owned", 5),
+    getPosts("owned", 3),
     getSiteImageCfg(),
   ]);
 
