@@ -5,6 +5,7 @@ import { SITE_DESCRIPTION_ROOT, SITE_TITLE, SITE_URL } from "@constants/app";
 import "@styles/globals.css";
 import { DefaultSeo } from "next-seo";
 import type { AppProps } from "next/app";
+import Footer from "../components/Footer";
 import SubscribeModal from "../components/client/SubscribeModal";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -29,12 +30,15 @@ export default function App({ Component, pageProps }: AppProps) {
           },
         ]}
       />
+      {/* Background Processes */}
       <ScrollReset />
       <Analytics />
-      <Navbar />
       <SubscribeModal />
+      {/* Content */}
+      <Navbar />
       <main className="grow overflow-y-auto scroll-smooth" id="main">
         <Component {...pageProps} />
+        <Footer />
       </main>
     </>
   );

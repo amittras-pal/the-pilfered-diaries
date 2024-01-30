@@ -19,7 +19,11 @@ export default function Navbar() {
                 Home
               </Link>
             </li>
-            {/* TODO: About */}
+            <li>
+              <Link href="/about" className="hover:text-white">
+                About Me & The Blog
+              </Link>
+            </li>
             <li>
               <Link href="/stories" className="hover:text-white">
                 Stories & Narratives
@@ -31,7 +35,9 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link href="/submissions">Submit Your Work</Link>
+              <Link href="/submissions" className="hover:text-white">
+                Submit Your Work
+              </Link>
             </li>
           </ul>
         </div>

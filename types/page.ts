@@ -19,6 +19,10 @@ export interface HomeProps {
   headerCfg: SiteImageCfg;
 }
 
+export interface AboutProps {
+  image: string;
+}
+
 export interface StoriesListProps {
   stories: StoryWOChaptersNContent[];
 }

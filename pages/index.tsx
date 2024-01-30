@@ -26,14 +26,23 @@ export default function Home({
       <div className="flex flex-col md:flex-row gap-2 md:gap-3 max-w-screen-2xl mx-auto py-4 px-2 md:px-3">
         <section className="basis-3/5 flex flex-col">
           <Stories data={stories} />
-          <Divider direction="horizontal" className="mt-3" />
-          <SubmitContent />
-          <SubscriptionForm />
         </section>
         <section className="basis-2/5">
           <Posts data={posts} />
         </section>
       </div>
+      <Divider
+        direction="horizontal"
+        className="mt-3 max-w-xs md:max-w-screen-md mx-auto bg-purple-400"
+      />
+      <section className="flex flex-col md:flex-row gap-2 md:gap-3 max-w-screen-2xl mx-auto py-4 px-2 md:px-3">
+        <div className="basis-3/5">
+          <SubmitContent />
+        </div>
+        <div className="basis-2/5">
+          <SubscriptionForm />
+        </div>
+      </section>
     </div>
   );
 }
