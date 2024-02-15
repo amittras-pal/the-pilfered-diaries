@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+# Host
+Host: https://thepilfereddiaries.in
+
+# Sitemaps
+Sitemap: https://thepilfereddiaries.in/sitemap.xml

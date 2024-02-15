@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#__next {
+  @apply h-screen w-screen flex flex-col;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display;
+  }
+  p,
+  a,
+  label {
+    @apply font-body;
+  }
+  label {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .badge {
+    @apply font-body;
+  }
+  .btn {
+    @apply font-display font-semibold;
+  }
+  .modal::backdrop {
+    @apply backdrop-blur-sm;
+  }
+}

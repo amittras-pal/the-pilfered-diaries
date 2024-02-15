@@ -1,9 +1,0 @@
-@import "../theme/variables";
-
-.tag {
-  &__success {
-    background-color: rgba($color: $success, $alpha: 0.1);
-    color: $success;
-    border: 1px solid rgba($color: $success, $alpha: 0.5);
-  }
-}
